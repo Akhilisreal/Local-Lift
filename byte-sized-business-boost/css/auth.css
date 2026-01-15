@@ -1,0 +1,70 @@
+/* css/auth.css */
+
+/* Auth page tweaks on top of common styles */
+body {
+    /* keep the auth page visually centered and slightly different background */
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Auth form container */
+.auth-container {
+    background-color: #fff;
+    padding: 40px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Headings */
+.auth-container h2 {
+    margin-bottom: 30px;
+    color: #2f6cae;
+    font-size: 1.8rem;
+}
+
+/* Input fields */
+.auth-container input[type="text"], .auth-container input[type="email"], .auth-container input[type="password"] {
+    width: 100%; max-width: 100%; padding: 12px 15px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;
+}
+
+/* Buttons */
+.auth-container button { width:100%; padding:12px; border:none; border-radius:8px; background-color:#2f6cae; color:#fff; font-size:1rem; cursor:pointer; transition:background-color .2s ease; }
+.auth-container button:hover { background-color:#0056b3; }
+
+/* Links for switching login/signup */
+.auth-container .switch-link {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.auth-container .switch-link a {
+    color: #2f6cae;
+    text-decoration: none;
+}
+
+.auth-container .switch-link a:hover {
+    text-decoration: underline;
+}
+
+/* Error messages */
+.auth-container .error-msg {
+    color: #ff4d4f;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+/* Success messages */
+.auth-container .success-msg {
+    color: #28a745;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}

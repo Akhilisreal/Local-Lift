@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Favorites - Local Lift</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/business.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">Local Lift</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="help.html">Help</a>
+            <button id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+
+    <!-- Favorites container -->
+    <main class="favorites-container" id="favoritesContainer">
+        <!-- Favorite businesses will be rendered here automatically -->
+    </main>
+
+    <!-- Firebase/Auth scripts -->
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/favorites.js"></script>
+
+    <!-- Render favorites on page load -->
+    <script type="module">
+        import { renderFavorites } from '../js/favorites.js';
+        renderFavorites('favoritesContainer');
+    </script>
+</body>
+</html>

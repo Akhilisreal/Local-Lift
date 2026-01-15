@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Details - Local Lift</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/business.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="../index.html" class="logo">Local Lift</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="help.html">Help</a>
+            <button id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+
+    <main class="business-details-container" id="businessDetailsContainer">
+        <!-- Business details will be rendered here -->
+    </main>
+
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/businesses.js"></script>
+    <script type="module" src="../js/favorites.js"></script>
+        <script type="module">
+            import { auth } from "../js/auth.js";
+            import { renderBusinessDetails } from "../js/businesses.js";
+
+            auth.onAuthStateChanged(user => {
+                if (!user) return; // auth.js will redirect if needed
+                renderBusinessDetails();
+            });
+        </script>
+</body>
+</html>

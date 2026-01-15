@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - Local Lift</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar">
+    <a href="../index.html" class="logo">Local Lift</a>
+      <nav>
+          <a href="../index.html">Home</a>
+          <a href="favorites.html">Favorites</a>
+          <a href="help.html">Help</a>
+          <button id="logoutBtn">Logout</button>
+      </nav>
+  </header>
+
+
+    <!-- Main Profile Content -->
+    <main class="profile-wrapper">
+        <div class="profile-container">
+            <h2>Your Profile</h2>
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+                <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
+                <p><strong>Password:</strong> <span id="profilePassword">********</span></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase and JS scripts -->
+    <script type="module" src="../js/firebase.js"></script>
+    <script type="module" src="../js/profile.js"></script>
+</body>
+</html>

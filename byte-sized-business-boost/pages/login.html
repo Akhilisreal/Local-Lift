@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Local Lift</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Login</h2>
+        <p class="error-msg" id="loginError"></p>
+        <input type="email" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button id="loginBtn">Log In</button>
+        <p class="switch-link">Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </div>
+
+    <script>
+        // Require captcha pass before allowing access to login page.
+        (function() {
+            try {
+                const passed = sessionStorage.getItem('captchaPassed');
+                if (passed !== 'true') {
+                    window.location.href = 'captcha.html';
+                } else {
+                    // Consume the flag so each new visit requires a fresh captcha
+                    sessionStorage.removeItem('captchaPassed');
+                }
+            } catch (e) {
+                window.location.href = 'captcha.html';
+            }
+        })();
+    </script>
+
+    <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

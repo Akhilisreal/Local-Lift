@@ -1,0 +1,43 @@
+@import url('common.css');
+
+/* Main-specific styles*/
+
+
+/* Main Container*/
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+/* Buttons*/
+button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Links*/
+a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #2f6cae;
+}
+
+/* Utility / Containers*/
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}

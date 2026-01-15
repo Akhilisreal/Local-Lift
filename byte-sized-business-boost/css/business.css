@@ -1,0 +1,392 @@
+/* =============================
+   Business Cards Styles
+============================= */
+
+/* Card container layout for both index and favorites pages */
+#businessContainer,
+#favoritesContainer {
+    /* Use a responsive grid that creates columns up to 300px wide.
+       Columns do not expand to fill the entire row, so when there
+       are fewer cards they stay left-aligned instead of stretching.
+       The grid will place the maximum number of full 300px columns
+       that fit the container, wrapping to the next row when needed. */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 300px));
+    gap: 20px;
+    padding: 20px 0;
+    justify-content: start;
+    justify-items: start;
+}
+
+/* Individual business card */
+.business-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    transition: transform 0.2s ease;
+    margin-top: 4px;
+}
+
+.business-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card image */
+.business-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Card content */
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h3 {
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+    margin: 4px 0;
+}
+
+/* Buttons container */
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+/* Buttons */
+.view-business-btn,
+.favorite-btn, .unfavorite-btn {
+    flex: 1;
+    padding: 8px 12px;
+    background-color: #2f6cae;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.view-business-btn:hover,
+.favorite-btn:hover,
+.unfavorite-btn:hover {
+    background-color: #5f76a0;
+}
+
+/* =============================
+   Business Details (pages/business.html)
+   Two-column layout: header (image + info + fav button)
+   and reviews container. Items inside each are stacked vertically.
+============================= */
+.business-details-card {
+    max-width: none;
+    width: 100%;
+    margin: 24px 0;
+    /* make wrapper neutral so children appear as separate cards */
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-direction: column; /* stacks on small screens */
+}
+
+/* Reusable image style matching business card images */
+.business-image,
+.business-details-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.business-details-card h2 {
+    font-size: 28px;
+    margin: 12px 0 8px 0;
+    color: #222;
+}
+
+.business-details-card p {
+    color: #555;
+    line-height: 1.6;
+    margin: 6px 0;
+    font-size: 16px;
+}
+
+.business-details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 4px;
+    width: 100%;
+}
+
+/* New containers: header (image + info + fav buttons) and reviews */
+.business-header,
+.business-reviews {
+    display: flex;
+    flex-direction: column; /* vertical stacking */
+    gap: 12px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Make header and reviews look like separate cards */
+.business-header,
+.business-reviews {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    padding: 20px;
+}
+
+.business-header { overflow: hidden; }
+
+/* spacing when stacked on small screens */
+.business-header { margin-bottom: 16px; }
+
+.business-reviews { min-height: 160px; }
+
+/* Center the header image at the top of the card, constrained width
+   and rounded corners so it looks like the card images but does not
+   span the entire card width. */
+.business-header img,
+.business-header .business-image {
+    display: block;
+    width: 100%;
+    max-width: 360px; /* limits how wide the image grows */
+    margin: 0 auto 12px; /* center horizontally, gap below */
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+@media (min-width: 760px) {
+    .business-header img,
+    .business-header .business-image {
+        max-width: 360px;
+        max-height: 260px;
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* On wider screens make the details card a two-column layout */
+@media (min-width: 760px) {
+    /* use a two-column grid so both containers fill the card area exactly */
+    .business-details-card {
+        display: grid;
+        grid-template-columns: minmax(300px,360px) 1fr;
+        gap: 20px;
+        align-items: start;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ensure header/card sizing is handled by the grid */
+    .business-header {
+        width: auto;
+    }
+
+    .business-reviews {
+        width: auto;
+    }
+
+    /* slightly larger image when in the left column */
+    .business-image,
+    .business-details-card img {
+        width: 100%;
+        height: 260px;
+        flex-shrink: 0;
+    }
+
+    .business-details-content {
+        padding-left: 12px;
+    }
+}
+
+/* Favorite button on details page should match card buttons */
+#favBtn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 12px;
+    background-color: #2f6cae;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
+}
+
+#favBtn:hover {
+    background-color: #5f76a0;
+}
+
+/* Rating display */
+.card-rating,
+#avgRating {
+    margin-top: 8px;
+    font-weight: 600;
+    color: #333;
+}
+.avg-stars, .review-stars {
+    color: #ffb400; /* gold */
+    margin-left: 8px;
+}
+
+/* Star icon styling for average and review displays */
+.star {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 1;
+    margin-right: 2px;
+    color: #ddd; /* default (empty) star color) */
+}
+.star::before {
+    content: '★';
+    display: inline-block;
+}
+.star.filled {
+    color: #ffb400; /* filled star color */
+}
+.star.empty {
+    color: #ddd; /* empty star color */
+}
+
+/* Reviews */
+.review-item {
+    border-top: 1px solid #eee;
+    padding: 8px;
+    margin-top: 8px;
+}
+.review-item p {
+    margin: 6px 0 0 0;
+    color: #444;
+}
+
+#reviewForm {
+    margin-top: 20px;
+}
+#reviewForm textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none; /* remove visible border for index dropdowns */
+    box-shadow: 0 4px 12px rgba(47,108,174,0.12);
+    font-family: sans-serif;
+}
+#reviewForm select {
+    margin: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none; /* remove visible border for index dropdowns */
+    box-shadow: 0 4px 12px rgba(47,108,174,0.12);
+}
+#reviewForm button {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #2f6cae;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Controls on index page */
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 20px;
+}
+
+/* Deals panel inside business details */
+.business-deals {
+    margin-top: 12px;
+    padding: 12px;
+    background: #f8fbff;
+    border: 1px solid #e9f2ff;
+    border-radius: 10px;
+}
+.business-deals h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #23466a;
+}
+.business-deals .deals-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+    display: block;
+}
+.business-deals .deals-list li {
+    margin: 6px 0;
+    padding: 8px 10px;
+    background: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(20,45,70,0.04);
+    color: #123;
+    line-height: 1.4;
+}
+
+@media (max-width: 760px) {
+    .business-deals .deals-list li {
+        padding: 10px 12px;
+    }
+}
+.controls label {
+    font-weight: 600;
+    color: #333;
+}
+.controls select {
+    margin-left: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: none; /* remove visible border for index dropdowns */
+    box-shadow: 0 4px 12px rgba(47,108,174,0.12);
+}
+
+/* Move index and favorites page content closer to the top-left */
+/* Specific selectors to override global `main` centering */
+#main-content-container {
+    margin: 24px 24px 0 20px; /* top, right, bottom, left */
+    max-width: none;
+    padding: 0;
+}
+
+/* favorites page uses the main element as #favoritesContainer */
+.favorites-container,
+#favoritesContainer {
+    margin: 32px 24px 0 20px;
+    max-width: none;
+    padding: 0;
+}
+
+/* Tighten padding/gap on card rows so cards appear closer to top-left */
+#businessContainer,
+#favoritesContainer {
+    padding: 8px 8px;
+    gap: 28px;
+}

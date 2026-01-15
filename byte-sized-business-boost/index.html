@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Lift</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/business.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <a href="index.html" class="logo">Local Lift</a>
+    <nav>
+      <a href="pages/favorites.html">Favorites</a>
+      <a href="pages/profile.html">Profile</a>
+      <a href="pages/help.html">Help</a>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <!-- Main content container for business cards -->
+  <main id="main-content-container">
+    <div class="controls">
+      <label>Category: <select id="categoryFilter"></select></label>
+      <label>Sort: <select id="sortSelect">
+        <option value="">None</option>
+        <option value="rating-desc">Rating (high → low)</option>
+        <option value="rating-asc">Rating (low → high)</option>
+        <option value="category-asc">Category (A → Z)</option>
+      </select></label>
+    </div>
+    <div id="businessContainer"></div>
+  </main>
+
+  <script type="module">
+    import { auth } from "./js/auth.js";
+    import { renderBusinessCards } from "./js/businesses.js";
+
+    // Attach logout functionality
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+      logoutBtn.onclick = () => {
+        auth.signOut().then(() => {
+          window.location.href = "./pages/login.html";
+        });
+      };
+    }
+
+    // Render business cards if logged in
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "./pages/login.html";
+      } else {
+        renderBusinessCards();
+      }
+    });
+  </script>
+</body>
+</html>

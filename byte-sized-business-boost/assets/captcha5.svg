@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="80">
+  <rect width="100%" height="100%" fill="#f7fbff"/>
+  <g font-family="Courier New, monospace" font-weight="700" font-size="34">
+    <text x="20" y="50" fill="#204060" transform="rotate(-2 40 40)">9LmW1</text>
+  </g>
+  <g stroke="#e6f0fa" stroke-width="1">
+    <line x1="0" y1="12" x2="300" y2="14"/>
+    <line x1="0" y1="68" x2="300" y2="66"/>
+  </g>
+</svg>

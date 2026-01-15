@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verification - Local Lift</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <style>
+        .captcha-container { max-width: 420px; margin: 60px auto; text-align: center; }
+        .captcha-image { border: 1px solid #e0e0e0; display:block; margin: 12px auto; width:300px; height:80px; }
+        .captcha-input { width: 100%; padding: 10px; margin: 8px 0; }
+        .captcha-actions { display:flex; gap:8px; justify-content:center; }
+        .captcha-hint { margin-top: 10px; font-size: .9rem; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="captcha-container auth-container">
+        <h2>Human Verification</h2>
+        <p id="captcha-msg" class="error-msg"></p>
+        <img id="captchaImg" class="captcha-image" src="" alt="captcha image">
+        <input id="captchaInput" class="captcha-input" placeholder="Type the characters you see in the image" autocomplete="off">
+        <div class="captcha-actions">
+            <button id="verifyBtn">Verify</button>
+            <button id="refreshBtn">Refresh</button>
+        </div>
+        <p class="captcha-hint">Passing this verification is required before accessing the login page.</p>
+    </div>
+
+    <script src="../js/captcha.js"></script>
+</body>
+</html>

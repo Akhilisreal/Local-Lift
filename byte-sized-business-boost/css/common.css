@@ -1,0 +1,115 @@
+/* ========================== */
+/* Common/shared site styles  */
+/* ========================== */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base typography and page background (can be overridden per-page) */
+body {
+  font-family: sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header / Navbar (base) */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #2f6cae;
+}
+
+.navbar nav a,
+.navbar nav button {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.navbar nav button:hover,
+.navbar nav a:hover { color: #007bff; }
+
+/* Main container constraint */
+main {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+button:hover { opacity: 0.9; }
+
+/* Links */
+a { text-decoration: none; color: #007bff; transition: color 0.2s ease; }
+a:hover { color: #2f6cae; }
+
+/* Utility container */
+.container { width: 100%; margin: 0 auto; padding: 20px; }
+
+/* Help page styles */
+.help-container {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 28px 32px;
+  box-shadow: 0 6px 18px rgba(18,38,63,0.06);
+  max-width: 900px;
+  margin: 40px auto;
+}
+.help-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #12325a;
+}
+.help-container h2 {
+  font-size: 1.05rem;
+  margin-top: 18px;
+  margin-bottom: 8px;
+  color: #2f6cae;
+}
+.help-container p { margin-bottom: 12px; color: #444; }
+.help-container ul { margin-left: 18px; margin-bottom: 12px; color: #444; }
+.help-container li { margin-bottom: 8px; }
+
+/* Callout / contact link */
+.help-contact {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 12px;
+  background: linear-gradient(90deg,#eaf4ff,#f7fbff);
+  border-radius: 8px;
+  border: 1px solid rgba(47,108,174,0.08);
+  color: #0b62a8;
+}
+
+@media (max-width: 640px) {
+  .help-container { padding: 18px 16px; margin: 20px; }
+  .navbar { padding: 12px 18px; }
+  .navbar .logo { font-size: 1.15rem; }
+}

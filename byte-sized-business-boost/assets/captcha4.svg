@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="80">
+  <rect width="100%" height="100%" fill="#fff9f9"/>
+  <g font-family="Tahoma, Geneva, sans-serif" font-weight="700" font-size="34">
+    <text x="22" y="52" fill="#6b2b8a" transform="rotate(3 40 40)">tQ2h6</text>
+  </g>
+  <g stroke="#f1e6f4" stroke-width="1">
+    <line x1="0" y1="18" x2="300" y2="22"/>
+    <line x1="0" y1="62" x2="300" y2="60"/>
+  </g>
+</svg>
