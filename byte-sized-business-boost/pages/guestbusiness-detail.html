@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Details - Local Lift</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/business.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="../index.html" class="logo">Local Lift</a>
+        <nav>
+            <a href="guestbusiness.html">Home</a>
+            <a href="help.html">Help</a>
+            <button onclick="window.location.href='login.html'">Login</button>
+        </nav>
+    </header>
+
+    <main class="business-details-container" id="businessDetailsContainer">
+        <!-- Business details rendered by guestbusinesses.js -->
+    </main>
+
+    <script type="module">
+        import { renderGuestBusinessDetails } from '../js/guestbusinesses.js';
+        renderGuestBusinessDetails();
+    </script>
+</body>
+</html>

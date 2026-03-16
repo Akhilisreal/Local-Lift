@@ -390,3 +390,21 @@
     padding: 8px 8px;
     gap: 28px;
 }
+
+/* Guest banner shown on guest pages */
+.guest-banner {
+    background: #eaf4ff;
+    border: 1px solid #c0d8f5;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #23466a;
+}
+
+/* Inline note on detail pages prompting guests to log in */
+.guest-notice {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
