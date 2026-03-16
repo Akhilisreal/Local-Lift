@@ -2,8 +2,7 @@
 
 /* Auth page tweaks on top of common styles */
 body {
-    /* keep the auth page visually centered and slightly different background */
-    background-color: #f0f2f5;
+    /* keep the auth page visually centered */
     display: flex;
     justify-content: center;
     align-items: center;
