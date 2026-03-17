@@ -22,7 +22,7 @@
 .business-card {
     background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 12px rgba(255,255,255,0.25);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -81,7 +81,7 @@
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.2);
     text-align: center;
     transition: background-color 0.2s ease;
 }
@@ -156,7 +156,7 @@
 .business-reviews {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 16px rgba(255,255,255,0.2);
     padding: 20px;
 }
 
@@ -181,14 +181,9 @@
     border-radius: 12px;
 }
 
-@media (min-width: 760px) {
-    .business-header img,
-    .business-header .business-image {
-        max-width: 360px;
-        max-height: 260px;
-        width: 100%;
-        height: auto;
-    }
+/* Controls label text (category / sort) */
+.controls label {
+    color: #fff;
 }
 
 /* On wider screens make the details card a two-column layout */
