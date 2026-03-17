@@ -10,6 +10,12 @@
 }
 
 /* Base typography and page background (can be overridden per-page) */
+html,
+body {
+  height: 100%;
+  background: transparent;
+}
+
 body {
   font-family: sans-serif;
   color: #333;
