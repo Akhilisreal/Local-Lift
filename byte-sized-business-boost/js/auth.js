@@ -207,14 +207,13 @@ if (logoutBtn) {
 // PROTECT PAGES & FILL PROFILE
 onAuthStateChanged(auth, user => {
     const protectedPages = [
-        '/index.html',
         '/pages/business.html',
         '/pages/profile.html',
         '/pages/favorites.html'
     ];
 
     if (!user && protectedPages.some(page => window.location.pathname.includes(page))) {
-        window.location.href = '/pages/login.html';
+        window.location.href = '/pages/captcha.html';
     }
 
     // Support both hyphenated and camelCase IDs used across pages

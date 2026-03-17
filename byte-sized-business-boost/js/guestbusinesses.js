@@ -27,12 +27,21 @@ export async function renderGuestBusinessCards() {
     // Clone seed data with a placeholder for average rating
     const instances = businessData.map(d => ({ ...d, _avgRating: null }));
 
-    // Populate category filter
+    // Save current selections before rebuilding the dropdown
+    const prevCategory = categorySelect ? categorySelect.value : '';
+    const prevSort = sortSelect ? sortSelect.value : '';
+
+    // Populate category filter (restore previous selection after rebuilding)
     if (categorySelect) {
         const cats = Array.from(new Set(instances.map(i => i.category))).sort();
         categorySelect.innerHTML = `<option value="all">All</option>` +
             cats.map(c => `<option value="${c}">${c}</option>`).join('');
+        if (prevCategory) {
+            const hasPrev = Array.from(categorySelect.options).some(opt => opt.value === prevCategory);
+            categorySelect.value = hasPrev ? prevCategory : 'all';
+        }
     }
+    if (sortSelect && prevSort) sortSelect.value = prevSort;
 
     // Fetch average ratings from Firebase (guests can read public data)
     await Promise.all(instances.map(async (inst) => {
