@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Businesses - Local Lift</title>
+    <title>Business Details - Local Lift</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/business.css">
 </head>
@@ -16,20 +16,8 @@
         </nav>
     </header>
 
-    <main id="main-content-container">
-        <div class="guest-banner">
-            <p>Browsing as guest &mdash; <a href="login.html">log in</a> or <a href="signup.html">sign up</a> to favorite businesses and leave reviews.</p>
-        </div>
-        <div class="controls">
-            <label>Category: <select id="categoryFilter"></select></label>
-            <label>Sort: <select id="sortSelect">
-                <option value="">None</option>
-                <option value="rating-desc">Rating (high &rarr; low)</option>
-                <option value="rating-asc">Rating (low &rarr; high)</option>
-                <option value="category-asc">Category (A &rarr; Z)</option>
-            </select></label>
-        </div>
-        <div id="businessContainer"></div>
+    <main class="business-details-container" id="businessDetailsContainer">
+        <p style="color:#fff;text-align:center;margin-top:2rem">Loading...</p>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -50,8 +38,18 @@
     });
     </script>
     <script type="module">
-        import { renderGuestBusinessCards } from '../js/guestbusinesses.js';
-        renderGuestBusinessCards();
+        import { auth } from '../js/auth.js';
+        import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+        import { renderGuestBusinessDetails } from '../js/guestbusinesses.js';
+
+        // Sign in silently with the proxy account so Firebase DB reads succeed,
+        // then render the read-only business detail view (no favorites or review form).
+        signInWithEmailAndPassword(auth, 'haritest@gmail.com', 'haritest123')
+            .then(() => renderGuestBusinessDetails())
+            .catch(err => {
+                console.warn('Proxy sign-in failed, attempting guest render anyway', err);
+                renderGuestBusinessDetails();
+            });
     </script>
 </body>
 </html>

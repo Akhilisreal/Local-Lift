@@ -82,7 +82,7 @@ export async function renderGuestBusinessCards() {
             </div>
         `;
         card.querySelector('.view-business-btn').onclick = () =>
-            window.location.href = `guestbusiness-detail.html?businessId=${inst.id}`;
+            window.location.href = `guestbusiness.html?businessId=${inst.id}`;
         container.appendChild(card);
     }
 
