@@ -24,9 +24,6 @@
                 const passed = sessionStorage.getItem('captchaPassed');
                 if (passed !== 'true') {
                     window.location.href = 'captcha.html';
-                } else {
-                    // Consume the flag so each new visit requires a fresh captcha
-                    sessionStorage.removeItem('captchaPassed');
                 }
             } catch (e) {
                 window.location.href = 'captcha.html';
