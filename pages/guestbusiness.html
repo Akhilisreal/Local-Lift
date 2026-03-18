@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Details - Local Lift</title>
+    <title>Browse Businesses - Local Lift</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/business.css">
 </head>
 <body>
     <header class="navbar">
-        <a href="../index.html" class="logo">Local Lift</a>
+        <a href="guestbusiness.html" class="logo">Local Lift</a>
         <nav>
             <a href="help.html">Help</a>
             <button onclick="window.location.href='login.html'">Login</button>
         </nav>
     </header>
 
-    <main class="business-details-container" id="businessDetailsContainer">
-        <p style="color:#fff;text-align:center;margin-top:2rem">Loading...</p>
-    </main>
+    <!-- Listing view: shown when no businessId in URL -->
+    <div id="listingSection" style="display:none">
+        <div class="controls">
+            <label>Category: <select id="categoryFilter"></select></label>
+            <label>Sort:
+                <select id="sortSelect">
+                    <option value="">None</option>
+                    <option value="rating-desc">Rating (high → low)</option>
+                    <option value="rating-asc">Rating (low → high)</option>
+                    <option value="category-asc">Category (A → Z)</option>
+                </select>
+            </label>
+        </div>
+        <div id="businessContainer"></div>
+    </div>
+
+    <!-- Detail view: shown when businessId is in URL -->
+    <main class="business-details-container" id="businessDetailsContainer" style="display:none"></main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
@@ -40,15 +55,27 @@
     <script type="module">
         import { auth } from '../js/auth.js';
         import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-        import { renderGuestBusinessDetails } from '../js/guestbusinesses.js';
+        import { renderGuestBusinessCards, renderGuestBusinessDetails } from '../js/guestbusinesses.js';
 
-        // Sign in silently with the proxy account so Firebase DB reads succeed,
-        // then render the read-only business detail view (no favorites or review form).
-        signInWithEmailAndPassword(auth, 'haritest@gmail.com', 'haritest123')
-            .then(() => renderGuestBusinessDetails())
-            .catch(err => {
-                console.warn('Proxy sign-in failed, attempting guest render anyway', err);
+        const businessId = new URLSearchParams(window.location.search).get('businessId');
+
+        function render() {
+            if (businessId) {
+                document.getElementById('businessDetailsContainer').style.display = '';
+                document.title = 'Business Details - Local Lift';
                 renderGuestBusinessDetails();
+            } else {
+                document.getElementById('listingSection').style.display = '';
+                renderGuestBusinessCards();
+            }
+        }
+
+        // Sign in with proxy account so Firebase DB reads succeed, then render.
+        signInWithEmailAndPassword(auth, 'haritest@gmail.com', 'haritest123')
+            .then(render)
+            .catch(err => {
+                console.warn('Proxy sign-in failed, attempting render anyway', err);
+                render();
             });
     </script>
 </body>
