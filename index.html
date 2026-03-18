@@ -6,51 +6,8 @@
   <title>Local Lift</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/business.css">
-<<<<<<< HEAD:byte-sized-business-boost/index.html
-  <style>
-    #landing-page {
-      display: none;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-    }
-    #landing-page h1 { color: #fff; font-size: 2.8rem; margin-bottom: 12px; }
-    #landing-page .tagline { color: rgba(255,255,255,0.85); font-size: 1.15rem; margin-bottom: 36px; }
-    .landing-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .landing-btn {
-      padding: 14px 32px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: opacity 0.2s;
-    }
-    .landing-btn:hover { opacity: 0.85; color: inherit; }
-    .landing-btn-primary { background: #2f6cae; color: #fff; }
-    .landing-btn-guest { background: rgba(255,255,255,0.15); color: #fff; border: 2px solid rgba(255,255,255,0.5); }
-    #app-content { display: none; }
-  </style>
 </head>
-<body>
-  <!-- Landing page shown to unauthenticated visitors -->
-  <div id="landing-page">
-    <div>
-      <h1>Local Lift</h1>
-      <p class="tagline">Discover and support local businesses in your community.</p>
-      <div class="landing-actions">
-        <a href="pages/captcha.html" class="landing-btn landing-btn-primary">Login</a>
-        <a href="pages/guestbusiness.html" class="landing-btn landing-btn-guest">Browse as Guest</a>
-      </div>
-=======
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-</head>
-<body>
-  <div id="vanta-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+<bodys style="background-color: lightgray;">
   <!-- Header -->
   <header class="navbar">
     <a href="index.html" class="logo">Local Lift</a>
@@ -72,94 +29,32 @@
         <option value="rating-asc">Rating (low → high)</option>
         <option value="category-asc">Category (A → Z)</option>
       </select></label>
->>>>>>> bfa3dabd3e409745ce377b75293a98e2ed60c2dc:index.html
     </div>
-  </div>
-
-  <!-- Authenticated app content -->
-  <div id="app-content">
-    <header class="navbar">
-      <a href="index.html" class="logo">Local Lift</a>
-      <nav>
-        <a href="pages/favorites.html">Favorites</a>
-        <a href="pages/profile.html">Profile</a>
-        <a href="pages/help.html">Help</a>
-        <button id="logoutBtn">Logout</button>
-      </nav>
-    </header>
-
-    <main id="main-content-container">
-      <div class="controls">
-        <label>Category: <select id="categoryFilter"></select></label>
-        <label>Sort: <select id="sortSelect">
-          <option value="">None</option>
-          <option value="rating-desc">Rating (high &rarr; low)</option>
-          <option value="rating-asc">Rating (low &rarr; high)</option>
-          <option value="category-asc">Category (A &rarr; Z)</option>
-        </select></label>
-      </div>
-      <div id="businessContainer"></div>
-    </main>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-  <script>
-  VANTA.NET({
-    el: "body",
-    gyroControls: false,
-    mouseControls: false,
-    touchControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    color: 0x369a9,
-    backgroundColor: 0x1b153c,
-    speed: 0.5
-  });
-  </script>
+    <div id="businessContainer"></div>
+  </main>
 
   <script type="module">
     import { auth } from "./js/auth.js";
     import { renderBusinessCards } from "./js/businesses.js";
 
+    // Attach logout functionality
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
       logoutBtn.onclick = () => {
         auth.signOut().then(() => {
-          window.location.href = "./pages/captcha.html";
+          window.location.href = "./pages/login.html";
         });
       };
     }
 
+    // Render business cards if logged in
     auth.onAuthStateChanged(user => {
       if (!user) {
-        const lp = document.getElementById('landing-page');
-        lp.style.display = 'flex';
+        window.location.href = "./pages/login.html";
       } else {
-        document.getElementById('app-content').style.display = 'block';
         renderBusinessCards();
       }
     });
   </script>
-  <script>
-    VANTA.NET({
-      el: "#vanta-bg",
-      gyroControls: false,
-      mouseControls: false,
-      touchControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0x369a9,
-      backgroundColor: 0x1b153c,
-      points: 50.00,
-      maxDistance: 25.00,
-      spacing: 15.00,
-      speed: 1.0
-    });
-    </script>
 </body>
 </html>
