@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Report - Local Lift</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        /* ── Layout ── */
+        .report-page { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
+        .report-page h1 { color: #fff; font-size: 1.6rem; margin-bottom: 4px; }
+        .report-subtitle { color: #aaa; margin-bottom: 20px; font-size: 0.9rem; }
+
+        /* ── Tabs ── */
+        .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+        .tab-btn {
+            padding: 10px 22px; border: none; border-radius: 24px; cursor: pointer;
+            background: rgba(255,255,255,0.08); color: #ccc; font-size: 0.9rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .tab-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .tab-btn.active { background: #369a9; color: #fff; font-weight: 600; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ── PDF button ── */
+        #generatePdfBtn {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 20px; padding: 12px 28px;
+            background: linear-gradient(135deg, #369a9, #1b6e7a);
+            color: #fff; border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        #generatePdfBtn:disabled { opacity: 0.55; cursor: default; }
+        #generatePdfBtn::before { content: '📄'; font-size: 1.1rem; }
+
+        /* ── Favorites report list ── */
+        .rpt-biz {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; margin-bottom: 20px; overflow: hidden;
+        }
+        .rpt-biz-header { display: flex; gap: 16px; padding: 16px; align-items: flex-start; }
+        .rpt-biz-img { width: 100px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+        .rpt-biz-meta h3 { color: #fff; margin: 0 0 6px; }
+        .rpt-biz-meta p { color: #ccc; margin: 2px 0; font-size: 0.88rem; }
+        .rpt-reviews { border-top: 1px solid rgba(255,255,255,0.08); padding: 14px 16px; }
+        .rpt-reviews h4 { color: #aaa; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px; }
+        .rpt-review-item {
+            background: rgba(255,255,255,0.04); border-radius: 6px;
+            padding: 10px 12px; margin-bottom: 8px;
+        }
+        .rpt-reviewer { color: #fff; font-weight: 600; font-size: 0.9rem; }
+        .rpt-stars { color: #f0a500; margin: 0 8px; }
+        .rpt-date { color: #888; font-size: 0.8rem; }
+        .rpt-review-text { color: #ccc; margin: 6px 0 0; font-size: 0.88rem; }
+        .rpt-loading, .rpt-empty { color: #aaa; text-align: center; padding: 30px; }
+
+        /* ── Charts ── */
+        .chart-section { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; }
+        .chart-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .chart-controls label { color: #ccc; font-size: 0.9rem; }
+        .chart-controls select {
+            padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08); color: #fff; font-size: 0.9rem; cursor: pointer;
+        }
+        .chart-controls select option { background: #1b153c; }
+        .chart-wrapper { position: relative; height: 320px; }
+        .chart-nodata { color: #888; text-align: center; padding: 60px 20px; }
+        .tab-desc { color: #aaa; font-size: 0.88rem; margin-bottom: 16px; }
+
+        /* ── Compare tags ── */
+        #compareList { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+        .compare-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 12px; border-radius: 20px; border: 2px solid;
+            background: rgba(255,255,255,0.05); font-size: 0.88rem;
+        }
+        .compare-rm {
+            background: none; border: none; color: #aaa; cursor: pointer;
+            font-size: 0.9rem; line-height: 1; padding: 0 2px;
+        }
+        .compare-rm:hover { color: #ff6384; }
+        .compare-add-btn {
+            padding: 8px 18px; border-radius: 8px; border: none;
+            background: #369a9; color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+        }
+        .compare-add-btn:hover { opacity: 0.85; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="../index.html" class="logo">Local Lift</a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="profile.html">Profile</a>
+            <a href="help.html">Help</a>
+            <button id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+
+    <div class="report-page">
+        <h1>My Report</h1>
+        <p class="report-subtitle">View and export your favorited businesses, ratings, and trends.</p>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="favorites">Favorites Report</button>
+            <button class="tab-btn" data-tab="trends">Rating Trends</button>
+            <button class="tab-btn" data-tab="compare">Compare Businesses</button>
+        </div>
+
+        <!-- TAB 1: Favorites Report -->
+        <div id="tab-favorites" class="tab-content active">
+            <div id="favReportList"><p class="rpt-loading">Loading…</p></div>
+            <button id="generatePdfBtn">Download PDF Report</button>
+        </div>
+
+        <!-- TAB 2: Rating Trends -->
+        <div id="tab-trends" class="tab-content">
+            <p class="tab-desc">Select a business to see how its rating has changed over time.</p>
+            <div class="chart-section">
+                <div class="chart-controls">
+                    <label for="trendsSelect">Business:</label>
+                    <select id="trendsSelect">
+                        <option value="">— select —</option>
+                    </select>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="trendsChart"></canvas>
+                    <p id="trendsNoData" class="chart-nodata" style="display:none">No reviews yet for this business.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Compare Businesses -->
+        <div id="tab-compare" class="tab-content">
+            <p class="tab-desc">Add multiple businesses to compare their running-average rating trends side by side.</p>
+            <div class="chart-section">
+                <div class="chart-controls">
+                    <label for="compareSelect">Add business:</label>
+                    <select id="compareSelect">
+                        <option value="">— select —</option>
+                    </select>
+                    <button class="compare-add-btn" id="compareAddBtn">Add to Chart</button>
+                </div>
+                <div id="compareList"></div>
+                <div class="chart-wrapper">
+                    <canvas id="compareChart"></canvas>
+                    <p id="compareNoData" class="chart-nodata">Add a business above to begin comparing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+    VANTA.NET({
+        el: "body", gyroControls: false, mouseControls: false, touchControls: false,
+        minHeight: 200, minWidth: 200, scale: 1, scaleMobile: 1,
+        color: 0x369a9, backgroundColor: 0x1b153c, speed: 0.5
+    });
+    </script>
+    <script type="module">
+        import { initReportPage } from '../js/report.js';
+        initReportPage();
+    </script>
+</body>
+</html>

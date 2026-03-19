@@ -209,7 +209,8 @@ onAuthStateChanged(auth, user => {
     const protectedPages = [
         '/pages/business.html',
         '/pages/profile.html',
-        '/pages/favorites.html'
+        '/pages/favorites.html',
+        '/pages/report.html'
     ];
 
     if (!user && protectedPages.some(page => window.location.pathname.includes(page))) {
