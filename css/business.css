@@ -167,6 +167,14 @@
 
 .business-reviews { min-height: 160px; }
 
+.business-map {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    overflow: hidden;
+    width: 100%;
+}
+
 /* Center the header image at the top of the card, constrained width
    and rounded corners so it looks like the card images but does not
    span the entire card width. */
@@ -188,23 +196,36 @@
 
 /* On wider screens make the details card a two-column layout */
 @media (min-width: 760px) {
-    /* use a two-column grid so both containers fill the card area exactly */
+    /* use a two-column grid: header left (spans rows), reviews+map right */
     .business-details-card {
         display: grid;
         grid-template-columns: minmax(300px,360px) 1fr;
+        grid-template-rows: auto auto;
         gap: 20px;
         align-items: start;
         width: 100%;
         box-sizing: border-box;
     }
 
-    /* ensure header/card sizing is handled by the grid */
+    /* header spans both rows so it stays tall on the left */
     .business-header {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: auto;
+        align-self: stretch;
+    }
+
+    /* reviews top-right */
+    .business-reviews {
+        grid-column: 2;
+        grid-row: 1;
         width: auto;
     }
 
-    .business-reviews {
-        width: auto;
+    /* map bottom-right, under reviews */
+    .business-map {
+        grid-column: 2;
+        grid-row: 2;
     }
 
     /* slightly larger image when in the left column */

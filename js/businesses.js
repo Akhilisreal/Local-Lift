@@ -246,6 +246,14 @@ async function renderBusinessDetails() {
           </form>
         </section>
       </div>
+
+      <div class="business-map">
+        <gmp-map
+          center="37.4220656,-122.0840897"
+          zoom="10"
+          map-id="DEMO_MAP_ID"
+          style="height: 500px"></gmp-map>
+      </div>
     </div>
   `;
 
