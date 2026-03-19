@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/business.css">
 </head>
-<bodys style="background-color: lightgray;">
+<body class="no-navbar-gap">
   <!-- Header -->
   <header class="navbar">
-    <a href="index.html" class="logo">Local Lift</a>
+    <a href="landing.html" class="logo">Local Lift</a>
     <nav>
       <a href="pages/favorites.html">Favorites</a>
       <a href="pages/profile.html">Profile</a>
@@ -23,18 +23,23 @@
   <!-- Main content container for business cards -->
   <main id="main-content-container">
     <div class="controls">
-      <label>Category: <select id="categoryFilter"></select></label>
-      <label>Sort: <select id="sortSelect">
-        <option value="">None</option>
-        <option value="rating-desc">Rating (high → low)</option>
-        <option value="rating-asc">Rating (low → high)</option>
-        <option value="category-asc">Category (A → Z)</option>
-      </select></label>
+      <div class="filter-control">
+        <label>Category: <select id="categoryFilter"></select></label>
+      </div>
+      <div class="sort-control">
+        <label>Sort: <select id="sortSelect">
+          <option value="">None</option>
+          <option value="rating-desc">Rating (high → low)</option>
+          <option value="rating-asc">Rating (low → high)</option>
+          <option value="category-asc">Category (A → Z)</option>
+        </select></label>
+      </div>
     </div>
     <div id="businessContainer"></div>
   </main>
 
   <script type="module">
+    import './js/navbar.js';
     import { auth } from "./js/auth.js";
     import { renderBusinessCards } from "./js/businesses.js";
 

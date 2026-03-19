@@ -20,9 +20,10 @@
 
 /* Individual business card */
 .business-card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -53,12 +54,12 @@
 .card-content h3 {
     font-size: 22px;
     margin: 0 0 10px 0;
-    color: #333;
+    color: var(--text);
 }
 
 .card-content p {
     font-size: 14px;
-    color: #666;
+    color: var(--muted);
     line-height: 1.4;
     margin: 4px 0;
 }
@@ -75,21 +76,22 @@
 .favorite-btn, .unfavorite-btn {
     flex: 1;
     padding: 8px 12px;
-    background-color: #2f6cae;
-    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0b0c14;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
     text-align: center;
-    transition: background-color 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .view-business-btn:hover,
 .favorite-btn:hover,
 .unfavorite-btn:hover {
-    background-color: #5f76a0;
+    transform: translateY(-1px);
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
 }
 
 /* =============================
@@ -97,6 +99,11 @@
    Two-column layout: header (image + info + fav button)
    and reviews container. Items inside each are stacked vertically.
 ============================= */
+.business-details-container {
+    margin-top: 100px;
+    padding-bottom: 80px;
+}
+
 .business-details-card {
     max-width: none;
     width: 100%;
@@ -123,11 +130,11 @@
 .business-details-card h2 {
     font-size: 28px;
     margin: 12px 0 8px 0;
-    color: #222;
+    color: var(--text);
 }
 
 .business-details-card p {
-    color: #555;
+    color: var(--muted);
     line-height: 1.6;
     margin: 6px 0;
     font-size: 16px;
@@ -154,9 +161,10 @@
 /* Make header and reviews look like separate cards */
 .business-header,
 .business-reviews {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
     padding: 20px;
 }
 
@@ -168,9 +176,10 @@
 .business-reviews { min-height: 160px; }
 
 .business-map {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
     overflow: hidden;
     width: 100%;
 }
@@ -191,7 +200,8 @@
 
 /* Controls label text (category / sort) */
 .controls label {
-    color: #fff;
+    color: var(--text);
+    font-weight: 600;
 }
 
 /* On wider screens make the details card a two-column layout */
@@ -246,18 +256,18 @@
     display: inline-block;
     margin-top: 12px;
     padding: 8px 12px;
-    background-color: #2f6cae;
-    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0b0c14;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: background-color 0.2s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+    transition: background 0.2s ease;
 }
 
 #favBtn:hover {
-    background-color: #5f76a0;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
 }
 
 /* Rating display */
@@ -265,7 +275,7 @@
 #avgRating {
     margin-top: 8px;
     font-weight: 600;
-    color: #333;
+    color: var(--text);
 }
 .avg-stars, .review-stars {
     color: #ffb400; /* gold */
@@ -278,7 +288,7 @@
     font-size: 16px;
     line-height: 1;
     margin-right: 2px;
-    color: #ddd; /* default (empty) star color) */
+    color: rgba(255, 255, 255, 0.35); /* default (empty) star color */
 }
 .star::before {
     content: '★';
@@ -288,18 +298,18 @@
     color: #ffb400; /* filled star color */
 }
 .star.empty {
-    color: #ddd; /* empty star color */
+    color: rgba(255, 255, 255, 0.35); /* empty star color */
 }
 
 /* Reviews */
 .review-item {
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
     padding: 8px;
     margin-top: 8px;
 }
 .review-item p {
     margin: 6px 0 0 0;
-    color: #444;
+    color: var(--muted);
 }
 
 #reviewForm {
@@ -307,27 +317,29 @@
 }
 #reviewForm textarea {
     width: 100%;
-    padding: 8px;
-    border-radius: 6px;
-    border: none; /* remove visible border for index dropdowns */
-    box-shadow: 0 4px 12px rgba(47,108,174,0.12);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
     font-family: sans-serif;
 }
 #reviewForm select {
     margin: 8px;
     padding: 6px 8px;
-    border-radius: 6px;
-    border: none; /* remove visible border for index dropdowns */
-    box-shadow: 0 4px 12px rgba(47,108,174,0.12);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
 }
 #reviewForm button {
     margin-top: 8px;
     padding: 8px 12px;
-    background: #2f6cae;
-    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0b0c14;
     border: none;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* Controls on index page */
@@ -342,14 +354,15 @@
 .business-deals {
     margin-top: 12px;
     padding: 12px;
-    background: #f8fbff;
-    border: 1px solid #e9f2ff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 10px;
+    backdrop-filter: blur(14px);
 }
 .business-deals h3 {
     margin: 0 0 8px 0;
     font-size: 16px;
-    color: #23466a;
+    color: var(--text);
 }
 .business-deals .deals-list {
     list-style: disc;
@@ -360,10 +373,10 @@
 .business-deals .deals-list li {
     margin: 6px 0;
     padding: 8px 10px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(20,45,70,0.04);
-    color: #123;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    color: var(--muted);
     line-height: 1.4;
 }
 
@@ -372,22 +385,48 @@
         padding: 10px 12px;
     }
 }
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 20px;
+    flex-wrap: wrap;
+}
+
+.filter-control,
+.sort-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 10px 16px;
+    backdrop-filter: blur(14px);
+}
+
 .controls label {
     font-weight: 600;
-    color: #333;
+    color: var(--text);
 }
 .controls select {
     margin-left: 8px;
     padding: 6px 8px;
     border-radius: 6px;
     border: none; /* remove visible border for index dropdowns */
-    box-shadow: 0 4px 12px rgba(47,108,174,0.12);
+    box-shadow: 0 4px 12px rgba(105,199,255,0.12);
+    background: var(--bg-2);
+    color: var(--text);
 }
 
 /* Move index and favorites page content closer to the top-left */
 /* Specific selectors to override global `main` centering */
 #main-content-container {
-    margin: 24px 24px 0 20px; /* top, right, bottom, left */
+    margin: 95px 24px 0 20px; /* top, right, bottom, left */
+    max-width: none;
+    padding: 0;
+}
+
+/* Guest business listing section */
+#listingSection {
+    margin: 95px 24px 0 20px;
     max-width: none;
     padding: 0;
 }
@@ -395,7 +434,7 @@
 /* favorites page uses the main element as #favoritesContainer */
 .favorites-container,
 #favoritesContainer {
-    margin: 32px 24px 0 20px;
+    margin: 95px 24px 0 20px;
     max-width: none;
     padding: 0;
 }
@@ -409,18 +448,18 @@
 
 /* Guest banner shown on guest pages */
 .guest-banner {
-    background: #eaf4ff;
-    border: 1px solid #c0d8f5;
+    background: rgba(105, 199, 255, 0.12);
+    border: 1px solid rgba(105, 199, 255, 0.25);
     border-radius: 8px;
     padding: 10px 16px;
     margin-bottom: 12px;
     font-size: 0.95rem;
-    color: #23466a;
+    color: var(--accent);
 }
 
 /* Inline note on detail pages prompting guests to log in */
 .guest-notice {
     margin-top: 10px;
     font-size: 0.9rem;
-    color: #555;
+    color: var(--muted);
 }
