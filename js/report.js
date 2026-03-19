@@ -205,6 +205,68 @@ export async function generatePDF(user) {
         }
     }
 
+    // — Trends chart page —
+    if (includeTrendsInPDF) {
+        const trendsCanvas = document.getElementById('trendsChart');
+        doc.addPage();
+        y = 20;
+        doc.setFillColor(54, 154, 169);
+        doc.rect(10, y - 5, pw - 20, 11, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(13); doc.setFont('helvetica', 'bold');
+        const trendsSelectEl = document.getElementById('trendsSelect');
+        const trendsBiz = trendsSelectEl && trendsSelectEl.value
+            ? businessData.find(b => b.id === trendsSelectEl.value) : null;
+        doc.text('Rating Trends' + (trendsBiz ? ': ' + trendsBiz.name : ''), 14, y + 3);
+        y += 16;
+        if (trendsCanvas && trendsChart) {
+            const imgData = trendsCanvas.toDataURL('image/png');
+            const imgW = pw - 28;
+            const imgH = Math.min(imgW * (trendsCanvas.height / trendsCanvas.width), 150);
+            doc.setFillColor(240, 240, 255);
+            doc.rect(14, y, imgW, imgH, 'F');
+            doc.addImage(imgData, 'PNG', 14, y, imgW, imgH);
+        } else {
+            doc.setFontSize(10); doc.setTextColor(130, 130, 130);
+            doc.text('No chart data — select a business on the Rating Trends tab first.', 14, y);
+        }
+    }
+
+    // — Compare chart page —
+    if (includeCompareInPDF) {
+        const compareCanvas = document.getElementById('compareChart');
+        doc.addPage();
+        y = 20;
+        doc.setFillColor(54, 154, 169);
+        doc.rect(10, y - 5, pw - 20, 11, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(13); doc.setFont('helvetica', 'bold');
+        doc.text('Business Comparison', 14, y + 3);
+        y += 16;
+        if (compareCanvas && compareChart) {
+            const imgData = compareCanvas.toDataURL('image/png');
+            const imgW = pw - 28;
+            const imgH = Math.min(imgW * (compareCanvas.height / compareCanvas.width), 150);
+            doc.setFillColor(240, 240, 255);
+            doc.rect(14, y, imgW, imgH, 'F');
+            doc.addImage(imgData, 'PNG', 14, y, imgW, imgH);
+            y += imgH + 8;
+            if (compareSet.size) {
+                doc.setTextColor(20, 20, 20);
+                doc.setFontSize(9); doc.setFont('helvetica', 'bold');
+                doc.text('Businesses Compared:', 14, y); y += 5;
+                doc.setFont('helvetica', 'normal');
+                for (const [id] of compareSet) {
+                    const biz = businessData.find(b => b.id === id);
+                    if (biz) { doc.text('• ' + biz.name, 18, y); y += 5; }
+                }
+            }
+        } else {
+            doc.setFontSize(10); doc.setTextColor(130, 130, 130);
+            doc.text('No chart data — add businesses on the Compare tab first.', 14, y);
+        }
+    }
+
     // Page footers
     const total = doc.internal.getNumberOfPages();
     for (let p = 1; p <= total; p++) {
@@ -215,6 +277,11 @@ export async function generatePDF(user) {
 
     doc.save('LocalLift_Favorites_Report.pdf');
 }
+
+// ---------- PDF chart inclusion state ----------
+
+let includeTrendsInPDF = false;
+let includeCompareInPDF = false;
 
 // ---------- Tab 2: Rating trends chart ----------
 
@@ -417,6 +484,24 @@ export function initReportPage() {
     if (addBtn && compareSelect) {
         addBtn.addEventListener('click', () => {
             if (compareSelect.value) addToCompare(compareSelect.value);
+        });
+    }
+
+    // Add-to-PDF toggle buttons
+    const addTrendsBtn = document.getElementById('addTrendsToPdfBtn');
+    if (addTrendsBtn) {
+        addTrendsBtn.addEventListener('click', () => {
+            includeTrendsInPDF = !includeTrendsInPDF;
+            addTrendsBtn.textContent = includeTrendsInPDF ? '✓ Added to PDF' : '＋ Add Chart to PDF';
+            addTrendsBtn.classList.toggle('added', includeTrendsInPDF);
+        });
+    }
+    const addCompareBtn = document.getElementById('addCompareToPdfBtn');
+    if (addCompareBtn) {
+        addCompareBtn.addEventListener('click', () => {
+            includeCompareInPDF = !includeCompareInPDF;
+            addCompareBtn.textContent = includeCompareInPDF ? '✓ Added to PDF' : '＋ Add Chart to PDF';
+            addCompareBtn.classList.toggle('added', includeCompareInPDF);
         });
     }
 

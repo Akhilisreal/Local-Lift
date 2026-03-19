@@ -69,6 +69,22 @@
         .chart-nodata { color: #888; text-align: center; padding: 60px 20px; }
         .tab-desc { color: #aaa; font-size: 0.88rem; margin-bottom: 16px; }
 
+        /* ── Add-to-PDF buttons ── */
+        .add-to-pdf-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 14px; padding: 9px 20px;
+            border-radius: 8px; border: 1.5px solid rgba(54,154,169,0.5);
+            background: rgba(54,154,169,0.1); color: rgba(54,154,169,1);
+            font-size: 0.88rem; font-weight: 600; cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        .add-to-pdf-btn:hover { background: rgba(54,154,169,0.22); }
+        .add-to-pdf-btn.added {
+            background: rgba(54,154,169,0.32);
+            border-color: rgba(54,154,169,0.9);
+            color: #fff;
+        }
+
         /* ── Compare tags ── */
         #compareList { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
         .compare-tag {
@@ -130,6 +146,7 @@
                     <canvas id="trendsChart"></canvas>
                     <p id="trendsNoData" class="chart-nodata" style="display:none">No reviews yet for this business.</p>
                 </div>
+                <button id="addTrendsToPdfBtn" class="add-to-pdf-btn">＋ Add Chart to PDF</button>
             </div>
         </div>
 
@@ -149,6 +166,7 @@
                     <canvas id="compareChart"></canvas>
                     <p id="compareNoData" class="chart-nodata">Add a business above to begin comparing.</p>
                 </div>
+                <button id="addCompareToPdfBtn" class="add-to-pdf-btn">＋ Add Chart to PDF</button>
             </div>
         </div>
     </div>

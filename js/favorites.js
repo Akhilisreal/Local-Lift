@@ -62,7 +62,7 @@ export function renderFavorites(containerId) {
         const favSnapshot = await get(favRef);
 
         if (!favSnapshot.exists()) {
-            container.innerHTML = "<p>No favorites yet.</p>";
+            container.innerHTML = '<p class="empty-favorites-msg">No favorites yet.</p>';
             return;
         }
 
