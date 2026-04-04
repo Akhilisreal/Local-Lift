@@ -9,7 +9,7 @@
         /* ── Layout ── */
         .report-page { max-width: 900px; margin: 0 auto; padding: 24px 16px 60px; }
         .report-page h1 { color: #fff; font-size: 1.6rem; margin-bottom: 4px; }
-        .report-subtitle { color: #aaa; margin-bottom: 20px; font-size: 0.9rem; }
+        .report-subtitle { color: #b8cef0; margin-bottom: 20px; font-size: 0.9rem; }
 
         /* ── Tabs ── */
         .tabs {
@@ -21,11 +21,11 @@
             flex-wrap: wrap;
         }
         .tab-btn {
-            padding: 10px 22px; border: none; border-radius: 24px; cursor: pointer;
-            background: rgba(255,255,255,0.08); color: #ccc; font-size: 0.9rem;
+            padding: 10px 22px; border: 1px solid rgba(105,199,255,0.2); border-radius: 24px; cursor: pointer;
+            background: rgba(4,10,26,0.82); color: #b8cef0; font-size: 0.9rem;
             transition: background 0.2s, color 0.2s;
         }
-        .tab-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .tab-btn:hover { background: rgba(105,199,255,0.12); color: #eef2ff; }
         .tab-btn.active { background: #369a9; color: #fff; font-weight: 600; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
@@ -45,37 +45,37 @@
 
         /* ── Favorites report list ── */
         .rpt-biz {
-            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(4,10,26,0.88); border: 1px solid rgba(105,199,255,0.2);
             border-radius: 12px; margin-bottom: 20px; overflow: hidden;
         }
         .rpt-biz-header { display: flex; gap: 16px; padding: 16px; align-items: flex-start; }
         .rpt-biz-img { width: 100px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-        .rpt-biz-meta h3 { color: #fff; margin: 0 0 6px; }
-        .rpt-biz-meta p { color: #ccc; margin: 2px 0; font-size: 0.88rem; }
-        .rpt-reviews { border-top: 1px solid rgba(255,255,255,0.08); padding: 14px 16px; }
-        .rpt-reviews h4 { color: #aaa; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px; }
+        .rpt-biz-meta h3 { color: #eef2ff; margin: 0 0 6px; text-shadow: 0 1px 8px rgba(0,0,0,0.7); }
+        .rpt-biz-meta p { color: #b8cef0; margin: 2px 0; font-size: 0.88rem; }
+        .rpt-reviews { border-top: 1px solid rgba(105,199,255,0.12); padding: 14px 16px; }
+        .rpt-reviews h4 { color: #8dd4ff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 10px; }
         .rpt-review-item {
-            background: rgba(255,255,255,0.04); border-radius: 6px;
+            background: rgba(4,10,26,0.6); border-radius: 6px;
             padding: 10px 12px; margin-bottom: 8px;
         }
-        .rpt-reviewer { color: #fff; font-weight: 600; font-size: 0.9rem; }
+        .rpt-reviewer { color: #eef2ff; font-weight: 600; font-size: 0.9rem; }
         .rpt-stars { color: #f0a500; margin: 0 8px; }
-        .rpt-date { color: #888; font-size: 0.8rem; }
-        .rpt-review-text { color: #ccc; margin: 6px 0 0; font-size: 0.88rem; }
-        .rpt-loading, .rpt-empty { color: #aaa; text-align: center; padding: 30px; }
+        .rpt-date { color: #8dd4ff; font-size: 0.8rem; }
+        .rpt-review-text { color: #b8cef0; margin: 6px 0 0; font-size: 0.88rem; }
+        .rpt-loading, .rpt-empty { color: #b8cef0; text-align: center; padding: 30px; }
 
         /* ── Charts ── */
-        .chart-section { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; }
+        .chart-section { background: rgba(4,10,26,0.88); border: 1px solid rgba(105,199,255,0.2); border-radius: 12px; padding: 20px; }
         .chart-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-        .chart-controls label { color: #ccc; font-size: 0.9rem; }
+        .chart-controls label { color: #b8cef0; font-size: 0.9rem; }
         .chart-controls select {
-            padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.08); color: #fff; font-size: 0.9rem; cursor: pointer;
+            padding: 8px 14px; border-radius: 8px; border: 1px solid rgba(105,199,255,0.2);
+            background: rgba(4,10,26,0.8); color: #eef2ff; font-size: 0.9rem; cursor: pointer;
         }
-        .chart-controls select option { background: #1b153c; }
+        .chart-controls select option { background: #040a1a; }
         .chart-wrapper { position: relative; height: 320px; }
-        .chart-nodata { color: #888; text-align: center; padding: 60px 20px; }
-        .tab-desc { color: #aaa; font-size: 0.88rem; margin-bottom: 16px; }
+        .chart-nodata { color: #b8cef0; text-align: center; padding: 60px 20px; }
+        .tab-desc { color: #b8cef0; font-size: 0.88rem; margin-bottom: 16px; }
 
         /* ── Add-to-PDF buttons ── */
         .add-to-pdf-btn {
@@ -113,6 +113,7 @@
     </style>
 </head>
 <body>
+    <div id="vanta-bg"></div>
     <header class="navbar">
         <a href="/landing.html" class="logo">Local Lift</a>
         <nav>
@@ -188,5 +189,8 @@
         import { initReportPage } from '../js/report.js';
         initReportPage();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js"></script>
+    <script>VANTA.GLOBE({el:"#vanta-bg",mouseControls:false,touchControls:false,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color:0x3fc8ff});</script>
 </body>
 </html>

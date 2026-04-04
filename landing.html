@@ -82,6 +82,7 @@
   </style>
 </head>
 <body>
+  <div id="vanta-bg"></div>
   <div class="landing-hero">
     <h1>Welcome to Local Lift</h1>
     <p>
@@ -93,5 +94,8 @@
       <button class="primary" onclick="location.href='pages/login.html'">Log In / Create Account</button>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js"></script>
+  <script>VANTA.GLOBE({el:"#vanta-bg",mouseControls:false,touchControls:false,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color:0x3fc8ff});</script>
 </body>
 </html>
