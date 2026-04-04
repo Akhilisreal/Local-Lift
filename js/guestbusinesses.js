@@ -135,6 +135,16 @@ export async function renderGuestBusinessDetails() {
                     <p class="guest-notice" style="margin-top:16px"><a href="login.html">Log in</a> to submit a review.</p>
                 </section>
             </div>
+
+            <div class="business-map">
+                <gmp-map
+                    center="${data.latitude},${data.longitude}"
+                    zoom="16"
+                    map-id="DEMO_MAP_ID"
+                    style="height: 500px">
+                    <gmp-advanced-marker position="${data.latitude},${data.longitude}"></gmp-advanced-marker>
+                </gmp-map>
+            </div>
         </div>
     `;
 
