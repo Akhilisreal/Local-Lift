@@ -142,9 +142,10 @@ async function renderBusinessCards() {
   // ensure seed data exists before rendering
   await Business.ensureAllSeeded();
 
-  // read filter/sort controls if present
+  // read filter/sort/search controls if present
   const categorySelect = document.getElementById('categoryFilter');
   const sortSelect = document.getElementById('sortSelect');
+  const searchInput = document.getElementById('businessSearch');
 
   // create Business instances from the seed data (or source array)
   const instances = businessData.map(d => new Business(d));
@@ -164,8 +165,12 @@ async function renderBusinessCards() {
   // fetch per-business average ratings before rendering
   await Business.fetchAverages(instances);
 
-  // prepare the list, apply category filter and sort if controls are present
+  // prepare the list, apply search, category filter and sort if controls are present
   let list = instances.slice();
+  const searchQuery = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  if (searchQuery) {
+    list = list.filter(b => b.name.toLowerCase().includes(searchQuery));
+  }
   if (categorySelect && categorySelect.value && categorySelect.value !== 'all') {
     list = list.filter(b => b.category === categorySelect.value);
   }
@@ -199,6 +204,7 @@ async function renderBusinessCards() {
   }
 
   // re-render when controls change
+  if (searchInput) searchInput.oninput = () => renderBusinessCards();
   if (categorySelect) categorySelect.onchange = () => renderBusinessCards();
   if (sortSelect) sortSelect.onchange = () => renderBusinessCards();
 }
