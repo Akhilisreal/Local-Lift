@@ -27,16 +27,16 @@ function resolveAssetPath(p) {
 // In production this would come from an external admin tool or API.
 // Seeding Business Data
 const businessData = [
-  { id: "biz1", name: "Rosati's Pizza", category: "Food", img: "assets/rosatis.jpg", description: "A local pizza favorite on Deerpath & Western, known for thin-crust pies and strong community involvement.", deals: ["Buy one get one free on small drip coffee (Mon)", "10% off all pastries"] },
-  { id: "biz2", name: "Sunset Foods", category: "Food / Retail", img: "assets/sunset.png", description: "A neighborhood grocery store at Sunset Corners on Waukegan Rd, focused on high-quality products and standout customer service.", deals: ["Member discount: 15% off new releases"] },
-  { id: "biz3", name: "Lou Malnati's", category: "Food", img: "assets/loumalnatis.png", description: "A Chicago-style deep dish pizza chain with a location at Forest Square, beloved across the Chicagoland area for its buttery crust.", deals: ["First-time customers 20% off"] },
-  { id: "biz4", name: "Everett Farm", category: "Food", img: "assets/everett.avif", description: "A newer restaurant that opened at Forest Square in 2021, offering a farm-to-table dining experience in a relaxed, local setting.", deals: ["Free cookie with any loaf on Tuesdays"] },
-  { id: "biz5", name: "Le Colonial Lake Forest", category: "Food", img: "assets/lecolonial.jpeg", description: "An upscale French-Vietnamese restaurant known for elegant ambiance and refined cuisine — a standout dining option in the Lake Forest area.", deals: ["10% off screen replacements"] },
-  { id: "biz6", name: "Sushi Kushi Toyo", category: "Food", img: "assets/sushikushi.avif", description: "A Japanese restaurant located at Sunset Corners, offering sushi and other Japanese dishes in a casual, community-friendly setting.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz7", name: "Hollywood Feed", category: "Retail", img: "assets/hollywoodfeed.jpeg", description: "A pet supply store open since 2019, offering personalized nutrition advice, same-day pet food delivery, and self-serve dog wash stations. Returns are donated to local animal rescues.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz8", name: "OriMay Salon", category: "Services", img: "assets/orimaylogo.jpg", description: "A boutique hair salon in the Lake Forest Arcade, owned by Paola Lago, who brings over 20 years of experience from high-end salons and spas.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz9", name: "Scout Driver Driving School", category: "Services", img: "assets/scoutdriver.png", description: "A locally owned driving school at 246 E. Deerpath founded in 2023, offering teen and adult programs that meet all Illinois requirements, with flexible scheduling.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz10", name: "True Value (Sunset Corners)", category: "Retail", img: "assets/truevalue.jpeg", description: "A hardware and home goods store located in the Sunset Corners shopping area, serving Lake Forest residents with tools, supplies, and home improvement products.", deals: ["Student discount 15% on weekdays"] },
+  { id: "biz1", name: "Rosati's Pizza", latitude: "42.251189", longitude: "-87.839868", category: "Food", img: "assets/rosatis.jpg", description: "A local pizza favorite on Deerpath & Western, known for thin-crust pies and strong community involvement.", deals: ["Buy one get one free on small drip coffee (Mon)", "10% off all pastries"] },
+  { id: "biz2", name: "Sunset Foods", latitude: "42.2243191", longitude: "-87.8719858", category: "Food / Retail", img: "assets/sunset.png", description: "A neighborhood grocery store at Sunset Corners on Waukegan Rd, focused on high-quality products and standout customer service.", deals: ["Member discount: 15% off new releases"] },
+  { id: "biz3", name: "Lou Malnati's", latitude: "42.224602", longitude: "-87.874481", category: "Food", img: "assets/loumalnatis.png", description: "A Chicago-style deep dish pizza chain with a location at Forest Square, beloved across the Chicagoland area for its buttery crust.", deals: ["First-time customers 20% off"] },
+  { id: "biz4", name: "Everett Farm",  latitude: "42.224888", longitude: "-87.873873", category: "Food", img: "assets/everett.avif", description: "A newer restaurant that opened at Forest Square in 2021, offering a farm-to-table dining experience in a relaxed, local setting.", deals: ["Free cookie with any loaf on Tuesdays"] },
+  { id: "biz5", name: "Le Colonial Lake Forest",  latitude: "42.251911", longitude: "-87.841270", category: "Food", img: "assets/lecolonial.jpeg", description: "An upscale French-Vietnamese restaurant known for elegant ambiance and refined cuisine — a standout dining option in the Lake Forest area.", deals: ["10% off screen replacements"] },
+  { id: "biz6", name: "Sushi Kushi Toyo",  latitude: "42.225208", longitude: "-87.872353", category: "Food", img: "assets/sushikushi.avif", description: "A Japanese restaurant located at Sunset Corners, offering sushi and other Japanese dishes in a casual, community-friendly setting.", deals: ["Student discount 15% on weekdays"] },
+  { id: "biz7", name: "Hollywood Feed",  latitude: "42.250998", longitude: "-87.841486", category: "Retail", img: "assets/hollywoodfeed.jpeg", description: "A pet supply store open since 2019, offering personalized nutrition advice, same-day pet food delivery, and self-serve dog wash stations. Returns are donated to local animal rescues.", deals: ["Student discount 15% on weekdays"] },
+  { id: "biz8", name: "OriMay Salon",  latitude: "42.251388428864935", longitude: "-87.84030619969522", category: "Services", img: "assets/orimaylogo.jpg", description: "A boutique hair salon in the Lake Forest Arcade, owned by Paola Lago, who brings over 20 years of experience from high-end salons and spas.", deals: ["Student discount 15% on weekdays"] },
+  { id: "biz9", name: "Scout Driver Driving School", latitude: "42.251212", longitude: "-87.8411133", category: "Services", img: "assets/scoutdriver.png", description: "A locally owned driving school at 246 E. Deerpath founded in 2023, offering teen and adult programs that meet all Illinois requirements, with flexible scheduling.", deals: ["Student discount 15% on weekdays"] },
+  { id: "biz10", name: "True Value (Sunset Corners)", latitude: "42.22508349157069", longitude: "-87.87212690701608", category: "Retail", img: "assets/truevalue.jpeg", description: "A hardware and home goods store located in the Sunset Corners shopping area, serving Lake Forest residents with tools, supplies, and home improvement products.", deals: ["Student discount 15% on weekdays"] },
 ];
 
 // Class that represents each business and contains helpers to ensure
@@ -253,10 +253,12 @@ async function renderBusinessDetails() {
 
       <div class="business-map">
         <gmp-map
-          center="37.4220656,-122.0840897"
-          zoom="10"
+          center="${business.latitude},${business.longitude}"
+          zoom="16"
           map-id="DEMO_MAP_ID"
-          style="height: 500px"></gmp-map>
+          style="height: 500px">
+          <gmp-advanced-marker position="${business.latitude},${business.longitude}"></gmp-advanced-marker>
+        </gmp-map>
       </div>
     </div>
   `;

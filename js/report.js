@@ -220,10 +220,21 @@ export async function generatePDF(user) {
         doc.text('Rating Trends' + (trendsBiz ? ': ' + trendsBiz.name : ''), 14, y + 3);
         y += 16;
         if (trendsCanvas && trendsChart) {
+            const ts = trendsChart.options.scales;
+            const tl = trendsChart.options.plugins.legend.labels;
+            const savedColors = { ytick: ts.y.ticks.color, ytitle: ts.y.title.color, xtick: ts.x.ticks.color, legend: tl.color };
+            ts.y.ticks.color = '#000'; ts.y.title.color = '#000';
+            ts.x.ticks.color = '#000'; tl.color = '#000';
+            ts.y.grid.color = 'rgba(0,0,0,0.1)'; ts.x.grid.color = 'rgba(0,0,0,0.1)';
+            trendsChart.update('none');
             const imgData = trendsCanvas.toDataURL('image/png');
+            ts.y.ticks.color = savedColors.ytick; ts.y.title.color = savedColors.ytitle;
+            ts.x.ticks.color = savedColors.xtick; tl.color = savedColors.legend;
+            ts.y.grid.color = 'rgba(255,255,255,0.08)'; ts.x.grid.color = 'rgba(255,255,255,0.06)';
+            trendsChart.update('none');
             const imgW = pw - 28;
             const imgH = Math.min(imgW * (trendsCanvas.height / trendsCanvas.width), 150);
-            doc.setFillColor(240, 240, 255);
+            doc.setFillColor(255, 255, 255);
             doc.rect(14, y, imgW, imgH, 'F');
             doc.addImage(imgData, 'PNG', 14, y, imgW, imgH);
         } else {
@@ -244,10 +255,21 @@ export async function generatePDF(user) {
         doc.text('Business Comparison', 14, y + 3);
         y += 16;
         if (compareCanvas && compareChart) {
+            const cs = compareChart.options.scales;
+            const cl = compareChart.options.plugins.legend.labels;
+            const savedColors = { ytick: cs.y.ticks.color, ytitle: cs.y.title.color, xtick: cs.x.ticks.color, xtitle: cs.x.title.color, legend: cl.color };
+            cs.y.ticks.color = '#000'; cs.y.title.color = '#000';
+            cs.x.ticks.color = '#000'; cs.x.title.color = '#000'; cl.color = '#000';
+            cs.y.grid.color = 'rgba(0,0,0,0.1)'; cs.x.grid.color = 'rgba(0,0,0,0.1)';
+            compareChart.update('none');
             const imgData = compareCanvas.toDataURL('image/png');
+            cs.y.ticks.color = savedColors.ytick; cs.y.title.color = savedColors.ytitle;
+            cs.x.ticks.color = savedColors.xtick; cs.x.title.color = savedColors.xtitle; cl.color = savedColors.legend;
+            cs.y.grid.color = 'rgba(255,255,255,0.08)'; cs.x.grid.color = 'rgba(255,255,255,0.08)';
+            compareChart.update('none');
             const imgW = pw - 28;
             const imgH = Math.min(imgW * (compareCanvas.height / compareCanvas.width), 150);
-            doc.setFillColor(240, 240, 255);
+            doc.setFillColor(255, 255, 255);
             doc.rect(14, y, imgW, imgH, 'F');
             doc.addImage(imgData, 'PNG', 14, y, imgW, imgH);
             y += imgH + 8;
