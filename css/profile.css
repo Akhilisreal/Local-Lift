@@ -1,20 +1,15 @@
 /* Profile Page Overrides and layout */
 
-.navbar {
-    justify-content: flex-start;
-    gap: 12px;
-}
-
 .navbar nav {
-    margin-left: 54%;
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-wrap: nowrap;
 }
 
-.navbar nav a:hover, .navbar nav button:hover 
-{ 
-    color: var(--accent); 
+.navbar nav a:hover, .navbar nav button:hover
+{
+    color: var(--accent);
 }
 
 .profile-wrapper 

@@ -14,8 +14,8 @@
     grid-template-columns: repeat(auto-fit, minmax(0, 300px));
     gap: 20px;
     padding: 20px 0;
-    justify-content: start;
-    justify-items: start;
+    justify-content: center;
+    justify-items: center;
 }
 
 /* Individual business card */
@@ -102,6 +102,12 @@
 .business-details-container {
     margin-top: 100px;
     padding-bottom: 80px;
+}
+
+/* On the logged-in details page the body already adds 90px padding-top,
+   so reduce the container margin so the total matches the guest page (100px). */
+body.business-details-page .business-details-container {
+    margin-top: 10px;
 }
 
 .business-details-card {
@@ -391,6 +397,7 @@
     align-items: center;
     padding: 12px 20px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .search-control,
@@ -435,27 +442,26 @@
     color: var(--text);
 }
 
-/* Move index and favorites page content closer to the top-left */
-/* Specific selectors to override global `main` centering */
+/* Index, guest listing, and favorites page content */
 #main-content-container {
-    margin: 95px 24px 0 20px; /* top, right, bottom, left */
-    max-width: none;
-    padding: 0;
+    margin: 95px auto 0;
+    max-width: 1400px;
+    padding: 0 24px;
 }
 
 /* Guest business listing section */
 #listingSection {
-    margin: 95px 24px 0 20px;
-    max-width: none;
-    padding: 0;
+    margin: 95px auto 0;
+    max-width: 1400px;
+    padding: 0 24px;
 }
 
 /* favorites page uses the main element as #favoritesContainer */
 .favorites-container,
 #favoritesContainer {
-    margin: 95px 24px 0 20px;
-    max-width: none;
-    padding: 0;
+    margin: 95px auto 0;
+    max-width: 1400px;
+    padding: 0 24px;
 }
 
 /* Tighten padding/gap on card rows so cards appear closer to top-left */

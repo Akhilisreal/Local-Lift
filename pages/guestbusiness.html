@@ -12,6 +12,7 @@
     <header class="navbar">
         <a href="/landing.html" class="logo">Local Lift</a>
         <nav>
+            <a href="guestbusiness.html">Home</a>
             <a href="guesthelp.html">Help</a>
             <button onclick="window.location.href='login.html'">Login</button>
         </nav>
@@ -20,6 +21,9 @@
     <!-- Listing view: shown when no businessId in URL -->
     <div id="listingSection" style="display:none">
         <div class="controls">
+            <div class="search-control">
+                <input type="text" id="businessSearch" placeholder="Search businesses..." autocomplete="off">
+            </div>
             <div class="filter-control">
                 <label>Category: <select id="categoryFilter"></select></label>
             </div>
@@ -72,7 +76,7 @@
             });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js"></script>
-    <script>VANTA.GLOBE({el:"#vanta-bg",mouseControls:false,touchControls:false,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color:0x3fc8ff});</script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
+    <script>VANTA.WAVES({el:"#vanta-bg",mouseControls:true,touchControls:true,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color:0x40013,shininess:13,waveHeight:14.5,waveSpeed:0.85,zoom:1.15});</script>
 </body>
 </html>

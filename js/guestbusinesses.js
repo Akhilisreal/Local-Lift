@@ -23,6 +23,7 @@ export async function renderGuestBusinessCards() {
 
     const categorySelect = document.getElementById('categoryFilter');
     const sortSelect = document.getElementById('sortSelect');
+    const searchInput = document.getElementById('businessSearch');
 
     // Clone seed data with a placeholder for average rating
     const instances = businessData.map(d => ({ ...d, _avgRating: null }));
@@ -55,6 +56,10 @@ export async function renderGuestBusinessCards() {
 
     // Apply filter and sort
     let list = instances.slice();
+    if (searchInput && searchInput.value.trim()) {
+        const q = searchInput.value.trim().toLowerCase();
+        list = list.filter(b => b.name.toLowerCase().includes(q) || b.description.toLowerCase().includes(q));
+    }
     if (categorySelect && categorySelect.value && categorySelect.value !== 'all') {
         list = list.filter(b => b.category === categorySelect.value);
     }
@@ -86,9 +91,10 @@ export async function renderGuestBusinessCards() {
         container.appendChild(card);
     }
 
-    // Re-render when filter/sort controls change
+    // Re-render when filter/sort/search controls change
     if (categorySelect) categorySelect.onchange = () => renderGuestBusinessCards();
     if (sortSelect) sortSelect.onchange = () => renderGuestBusinessCards();
+    if (searchInput) searchInput.oninput = () => renderGuestBusinessCards();
 }
 
 // Render the business detail page for guests (guestbusiness-detail.html).
