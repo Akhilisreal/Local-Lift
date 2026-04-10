@@ -97,7 +97,7 @@ export function renderFavorites(containerId) {
                     <div class="card-rating">Average Rating: <span class="avg-rating">${avg ? Number(avg).toFixed(1) : '—'}</span> <span class="avg-stars">${avg ? renderStars(avg) : ''}</span></div>
                     <div class="card-buttons">
                     <button class="view-business-btn">View Details</button>
-                    <button class="unfavorite-btn">❤️ Unfavorite</button>
+                    <button class="unfavorite-btn">💔 Unfavorite</button>
                     </div>
                 </div>
             `;
