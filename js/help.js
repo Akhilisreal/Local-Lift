@@ -73,7 +73,7 @@ const faqData = [
     label: "Account & Sign-In",
     question: "Can I edit my profile?",
     answer:
-      "Yes — navigate to the Profile page from the navbar. From there you can update your display name and other account details.",
+      "No - There is no display name so there is nothing to be edited",
   },
 
   // ── Business listings ────────────────────────────────────
