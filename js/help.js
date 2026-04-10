@@ -59,7 +59,7 @@ const faqData = [
     label: "Account & Sign-In",
     question: "How do I log out?",
     answer:
-      "Click the \"Logout\" button in the top navigation bar. You'll be signed out and returned to the login page.",
+      "fucking dumbass",
   },
   {
     category: "auth",
