@@ -47,26 +47,23 @@
         if (attempts >= MAX_ATTEMPTS) return;
         const val = (inputEl.value || '').trim();
         if (!val) {
-            msgEl.textContent = 'Please enter the characters shown.';
+            msgEl.textContent = 'Por favor ingresa los caracteres mostrados.';
             return;
         }
         attempts++;
-        // compare answers case-insensitively
         if (val.toLowerCase() === current.answer.toLowerCase()) {
             try { sessionStorage.setItem('captchaPassed', 'true'); } catch (e) {}
             msgEl.style.color = 'green';
-            msgEl.textContent = 'Verified — redirecting to login...';
-            // short delay before redirect so user can see the message
+            msgEl.textContent = 'Verificado — redirigiendo al inicio de sesión...';
             setTimeout(() => { window.location.href = 'login.html'; }, 600);
         } else {
-            // on failure, show message and either lock out or refresh image
             msgEl.style.color = '#b22222';
             if (attempts >= MAX_ATTEMPTS) {
-                msgEl.textContent = 'Too many failed attempts. Please try again later.';
+                msgEl.textContent = 'Demasiados intentos fallidos. Por favor intenta más tarde.';
                 verifyBtn.disabled = true;
                 inputEl.disabled = true;
             } else {
-                msgEl.textContent = `Incorrect — Attempts left: ${MAX_ATTEMPTS - attempts}`;
+                msgEl.textContent = `Incorrecto — Intentos restantes: ${MAX_ATTEMPTS - attempts}`;
                 pickRandom();
             }
         }

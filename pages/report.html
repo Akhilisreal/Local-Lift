@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Report - Local Lift</title>
+    <title>Mi Reporte - Local Lift</title>
     <link rel="stylesheet" href="../css/main.css">
     <style>
         /* ── Layout ── */
@@ -117,65 +117,65 @@
     <header class="navbar">
         <a href="/landing.html" class="logo">Local Lift</a>
         <nav>
-            <a href="../index.html">Home</a>
-            <a href="favorites.html">Favorites</a>
-            <a href="profile.html">Profile</a>
-            <a href="help.html">Help</a>
-            <button id="logoutBtn">Logout</button>
+            <a href="../index.html">Inicio</a>
+            <a href="favorites.html">Favoritos</a>
+            <a href="profile.html">Perfil</a>
+            <a href="help.html">Ayuda</a>
+            <button id="logoutBtn">Cerrar Sesión</button>
         </nav>
     </header>
 
     <div class="report-page">
-        <h1>My Report</h1>
-        <p class="report-subtitle">View and export your favorited businesses, ratings, and trends.</p>
+        <h1>Mi Reporte</h1>
+        <p class="report-subtitle">Visualiza y exporta tus negocios favoritos, calificaciones y tendencias.</p>
 
         <div class="tabs">
-            <button class="tab-btn active" data-tab="favorites">Favorites Report</button>
-            <button class="tab-btn" data-tab="trends">Rating Trends</button>
-            <button class="tab-btn" data-tab="compare">Compare Businesses</button>
-            <button id="generatePdfBtn">Download PDF Report</button>
+            <button class="tab-btn active" data-tab="favorites">Reporte de Favoritos</button>
+            <button class="tab-btn" data-tab="trends">Tendencias de Calificación</button>
+            <button class="tab-btn" data-tab="compare">Comparar Negocios</button>
+            <button id="generatePdfBtn">Descargar Reporte PDF</button>
         </div>
 
         <!-- TAB 1: Favorites Report -->
         <div id="tab-favorites" class="tab-content active">
-            <div id="favReportList"><p class="rpt-loading">Loading…</p></div>
+            <div id="favReportList"><p class="rpt-loading">Cargando…</p></div>
         </div>
 
         <!-- TAB 2: Rating Trends -->
         <div id="tab-trends" class="tab-content">
-            <p class="tab-desc">Select a business to see how its rating has changed over time.</p>
+            <p class="tab-desc">Selecciona un negocio para ver cómo ha cambiado su calificación con el tiempo.</p>
             <div class="chart-section">
                 <div class="chart-controls">
-                    <label for="trendsSelect">Business:</label>
+                    <label for="trendsSelect">Negocio:</label>
                     <select id="trendsSelect">
-                        <option value="">— select —</option>
+                        <option value="">— seleccionar —</option>
                     </select>
                 </div>
                 <div class="chart-wrapper">
                     <canvas id="trendsChart"></canvas>
-                    <p id="trendsNoData" class="chart-nodata" style="display:none">No reviews yet for this business.</p>
+                    <p id="trendsNoData" class="chart-nodata" style="display:none">Aún no hay reseñas para este negocio.</p>
                 </div>
-                <button id="addTrendsToPdfBtn" class="add-to-pdf-btn">＋ Add Chart to PDF</button>
+                <button id="addTrendsToPdfBtn" class="add-to-pdf-btn">＋ Agregar Gráfica al PDF</button>
             </div>
         </div>
 
         <!-- TAB 3: Compare Businesses -->
         <div id="tab-compare" class="tab-content">
-            <p class="tab-desc">Add multiple businesses to compare their running-average rating trends side by side.</p>
+            <p class="tab-desc">Agrega varios negocios para comparar sus tendencias de calificación promedio.</p>
             <div class="chart-section">
                 <div class="chart-controls">
-                    <label for="compareSelect">Add business:</label>
+                    <label for="compareSelect">Agregar negocio:</label>
                     <select id="compareSelect">
-                        <option value="">— select —</option>
+                        <option value="">— seleccionar —</option>
                     </select>
-                    <button class="compare-add-btn" id="compareAddBtn">Add to Chart</button>
+                    <button class="compare-add-btn" id="compareAddBtn">Agregar a Gráfica</button>
                 </div>
                 <div id="compareList"></div>
                 <div class="chart-wrapper">
                     <canvas id="compareChart"></canvas>
-                    <p id="compareNoData" class="chart-nodata">Add a business above to begin comparing.</p>
+                    <p id="compareNoData" class="chart-nodata">Agrega un negocio arriba para comenzar a comparar.</p>
                 </div>
-                <button id="addCompareToPdfBtn" class="add-to-pdf-btn">＋ Add Chart to PDF</button>
+                <button id="addCompareToPdfBtn" class="add-to-pdf-btn">＋ Agregar Gráfica al PDF</button>
             </div>
         </div>
     </div>

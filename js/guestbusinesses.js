@@ -35,7 +35,7 @@ export async function renderGuestBusinessCards() {
     // Populate category filter (restore previous selection after rebuilding)
     if (categorySelect) {
         const cats = Array.from(new Set(instances.map(i => i.category))).sort();
-        categorySelect.innerHTML = `<option value="all">All</option>` +
+        categorySelect.innerHTML = `<option value="all">Todas</option>` +
             cats.map(c => `<option value="${c}">${c}</option>`).join('');
         if (prevCategory) {
             const hasPrev = Array.from(categorySelect.options).some(opt => opt.value === prevCategory);
@@ -77,12 +77,13 @@ export async function renderGuestBusinessCards() {
                 <img class="business-image" src="${resolveAssetPath(inst.img)}" alt="${inst.name}">
             </div>
             <div class="card-content">
-                <h3>${inst.name}</h3>
+                <h3>${inst.name}${inst.nameEs && inst.nameEs !== inst.name ? `<br><small class="name-es">${inst.nameEs}</small>` : ''}</h3>
                 <p>${inst.description}</p>
-                <p><strong>Category:</strong> ${inst.category}</p>
-                <div class="card-rating">Average Rating: <span class="avg-rating">${inst._avgRating ? Number(inst._avgRating).toFixed(1) : '—'}</span> <span class="avg-stars">${inst._avgRating ? renderStars(inst._avgRating) : ''}</span></div>
+                ${inst.descriptionEs ? `<p class="description-es"><em>${inst.descriptionEs}</em></p>` : ''}
+                <p><strong>Categoría:</strong> ${inst.category}</p>
+                <div class="card-rating">Calificación Promedio: <span class="avg-rating">${inst._avgRating ? Number(inst._avgRating).toFixed(1) : '—'}</span> <span class="avg-stars">${inst._avgRating ? renderStars(inst._avgRating) : ''}</span></div>
                 <div class="card-buttons">
-                    <button class="view-business-btn">View Details</button>
+                    <button class="view-business-btn">Ver Detalles</button>
                 </div>
             </div>
         `;
@@ -104,10 +105,10 @@ export async function renderGuestBusinessDetails() {
     if (!container) return;
 
     const businessId = new URLSearchParams(window.location.search).get('businessId');
-    if (!businessId) { container.innerHTML = '<p>No business selected.</p>'; return; }
+    if (!businessId) { container.innerHTML = '<p>No se seleccionó ningún negocio.</p>'; return; }
 
     const data = businessData.find(b => b.id === businessId);
-    if (!data) { container.innerHTML = '<p>Business not found.</p>'; return; }
+    if (!data) { container.innerHTML = '<p>Negocio no encontrado.</p>'; return; }
 
     // Fetch average rating
     let avg = null;
@@ -121,24 +122,25 @@ export async function renderGuestBusinessDetails() {
             <div class="business-header">
                 <img src="${resolveAssetPath(data.img)}" alt="${data.name}">
                 <div class="business-details-content">
-                    <h2>${data.name}</h2>
+                    <h2>${data.name}${data.nameEs && data.nameEs !== data.name ? `<br><small class="name-es">${data.nameEs}</small>` : ''}</h2>
                     <p>${data.description}</p>
-                    <p><strong>Category:</strong> ${data.category}</p>
+                    ${data.descriptionEs ? `<p class="description-es"><em>${data.descriptionEs}</em></p>` : ''}
+                    <p><strong>Categoría:</strong> ${data.category}</p>
                     ${Array.isArray(data.deals) && data.deals.length ? `
                         <div class="business-deals">
-                            <h3>Deals</h3>
+                            <h3>Ofertas</h3>
                             <ul class="deals-list">${data.deals.map(d => `<li>${escapeHtml(d)}</li>`).join('')}</ul>
                         </div>` : ''}
-                    <div id="avgRating">Average: <span class="avg-rating">${avg ? Number(avg).toFixed(1) : '—'}</span> <span class="avg-stars">${avg ? renderStars(avg) : ''}</span></div>
-                    <p class="guest-notice"><a href="login.html">Log in</a> to favorite businesses and leave reviews.</p>
+                    <div id="avgRating">Promedio: <span class="avg-rating">${avg ? Number(avg).toFixed(1) : '—'}</span> <span class="avg-stars">${avg ? renderStars(avg) : ''}</span></div>
+                    <p class="guest-notice"><a href="login.html">Inicia sesión</a> para agregar favoritos y dejar reseñas.</p>
                 </div>
             </div>
 
             <div class="business-reviews">
                 <section id="reviewsSection">
-                    <h3>Reviews</h3>
-                    <div id="reviewsList">Loading reviews...</div>
-                    <p class="guest-notice" style="margin-top:16px"><a href="login.html">Log in</a> to submit a review.</p>
+                    <h3>Reseñas</h3>
+                    <div id="reviewsList">Cargando reseñas...</div>
+                    <p class="guest-notice" style="margin-top:16px"><a href="login.html">Inicia sesión</a> para enviar una reseña.</p>
                 </section>
             </div>
 
@@ -165,12 +167,12 @@ export async function renderGuestBusinessDetails() {
             reviewsArr.forEach(r => {
                 const div = document.createElement('div');
                 div.className = 'review-item';
-                const name = r.name ? String(r.name).split('@')[0] : 'Anonymous';
+                const name = r.name ? String(r.name).split('@')[0] : 'Anónimo';
                 div.innerHTML = `<strong>${escapeHtml(name)}</strong> - <span class="review-stars">${renderStars(r.rating)}</span><p>${escapeHtml(r.text || '')}</p>`;
                 reviewsList.appendChild(div);
             });
         } else {
-            reviewsList.innerHTML = '<p>No reviews yet.</p>';
+            reviewsList.innerHTML = '<p>Aún no hay reseñas.</p>';
         }
     } catch (e) {
         console.error('Error loading reviews', e);

@@ -50,7 +50,7 @@ export function renderFavorites(containerId) {
     // `auth` here is the Firebase Auth instance; we rely on `user.displayName` to derive username keys.
     auth.onAuthStateChanged(async (user) => {
         if (!user) {
-            container.innerHTML = "<p>Please log in to see your favorites.</p>";
+            container.innerHTML = "<p>Por favor inicia sesión para ver tus favoritos.</p>";
             return;
         }
 
@@ -62,7 +62,7 @@ export function renderFavorites(containerId) {
         const favSnapshot = await get(favRef);
 
         if (!favSnapshot.exists()) {
-            container.innerHTML = '<p class="empty-favorites-msg">No favorites yet.</p>';
+            container.innerHTML = '<p class="empty-favorites-msg">Aún no tienes favoritos.</p>';
             return;
         }
 
@@ -93,11 +93,11 @@ export function renderFavorites(containerId) {
                 <div class="card-content">
                     <h3>${business.name}</h3>
                     <p>${business.description}</p>
-                    <p><strong>Category:</strong> ${business.category}</p>
-                    <div class="card-rating">Average Rating: <span class="avg-rating">${avg ? Number(avg).toFixed(1) : '—'}</span> <span class="avg-stars">${avg ? renderStars(avg) : ''}</span></div>
+                    <p><strong>Categoría:</strong> ${business.category}</p>
+                    <div class="card-rating">Calificación Promedio: <span class="avg-rating">${avg ? Number(avg).toFixed(1) : '—'}</span> <span class="avg-stars">${avg ? renderStars(avg) : ''}</span></div>
                     <div class="card-buttons">
-                    <button class="view-business-btn">View Details</button>
-                    <button class="unfavorite-btn">💔 Unfavorite</button>
+                    <button class="view-business-btn">Ver Detalles</button>
+                    <button class="unfavorite-btn">💔 Quitar Favorito</button>
                     </div>
                 </div>
             `;

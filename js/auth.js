@@ -51,33 +51,28 @@ function mapFirebaseError(err) {
     const raw = err && err.message ? String(err.message).toLowerCase() : '';
     // normalize and map common error codes/messages to friendly text
     switch (code) {
-        case 'auth/user-not-found': return 'No account matches that email. Check the address or create a new account.';
-        case 'auth/wrong-password': return 'The password is incorrect. Try again or reset your password if you forgot it.';
-        case 'auth/invalid-email': return 'Please enter a valid email address.';
-        case 'auth/email-already-in-use': return 'An account with this email already exists. Try logging in instead.';
-        case 'auth/weak-password': return 'Choose a stronger password (at least 6 characters).';
+        case 'auth/user-not-found': return 'Ninguna cuenta corresponde a ese correo. Verifica la dirección o crea una cuenta nueva.';
+        case 'auth/wrong-password': return 'La contraseña es incorrecta. Inténtalo de nuevo o restablece tu contraseña si la olvidaste.';
+        case 'auth/invalid-email': return 'Por favor ingresa una dirección de correo válida.';
+        case 'auth/email-already-in-use': return 'Ya existe una cuenta con este correo. Intenta iniciar sesión.';
+        case 'auth/weak-password': return 'Elige una contraseña más segura (al menos 6 caracteres).';
         default:
-                // If code is missing, try to infer from the message text to avoid showing raw Firebase strings
-                // First, try to extract an auth code like "auth/wrong-password" from the raw message
                 const codeMatch = raw.match(/auth\/?[a-z0-9-]+/i);
                 const inferred = codeMatch ? String(codeMatch[0]).toLowerCase().replace(/^auth\/?/, '') : '';
                 switch (inferred) {
-                    case 'user-not-found': return 'No account matches that email. Check the address or create a new account.';
-                    case 'wrong-password': return 'The password is incorrect. Try again or reset your password if you forgot it.';
-                    case 'invalid-email': return 'Please enter a valid email address.';
-                    case 'email-already-in-use': return 'An account with this email already exists. Try logging in instead.';
-                    case 'weak-password': return 'Choose a stronger password (at least 6 characters).';
+                    case 'user-not-found': return 'Ninguna cuenta corresponde a ese correo. Verifica la dirección o crea una cuenta nueva.';
+                    case 'wrong-password': return 'La contraseña es incorrecta. Inténtalo de nuevo o restablece tu contraseña si la olvidaste.';
+                    case 'invalid-email': return 'Por favor ingresa una dirección de correo válida.';
+                    case 'email-already-in-use': return 'Ya existe una cuenta con este correo. Intenta iniciar sesión.';
+                    case 'weak-password': return 'Elige una contraseña más segura (al menos 6 caracteres).';
                 }
 
-                // Fallback keyword checks (broader matching)
-                // broader string matching to cover varied Firebase messages
-                if (raw.includes('no user record') || raw.includes('there is no user') || raw.includes('no user')) return 'No account matches that email. Check the address or create a new account.';
-                if (raw.includes('wrong-password') || raw.includes('wrong password') || (raw.includes('password') && raw.includes('invalid'))) return 'The password is incorrect. Try again or reset your password if you forgot it.';
-                if (raw.includes('invalid-email') || raw.includes('invalid email')) return 'Please enter a valid email address.';
-                if (raw.includes('already in use') || raw.includes('already exists')) return 'An account with this email already exists. Try logging in instead.';
+                if (raw.includes('no user record') || raw.includes('there is no user') || raw.includes('no user')) return 'Ninguna cuenta corresponde a ese correo. Verifica la dirección o crea una cuenta nueva.';
+                if (raw.includes('wrong-password') || raw.includes('wrong password') || (raw.includes('password') && raw.includes('invalid'))) return 'La contraseña es incorrecta. Inténtalo de nuevo o restablece tu contraseña si la olvidaste.';
+                if (raw.includes('invalid-email') || raw.includes('invalid email')) return 'Por favor ingresa una dirección de correo válida.';
+                if (raw.includes('already in use') || raw.includes('already exists')) return 'Ya existe una cuenta con este correo. Intenta iniciar sesión.';
 
-                // As a last resort, return a short friendly message without echoing the full raw Firebase string
-                return 'Something went wrong. Either your email or password is invalid.';
+                return 'Algo salió mal. Tu correo o contraseña no son válidos.';
     }
 }
 
@@ -114,7 +109,7 @@ if (loginBtn) {
         const password = document.getElementById('loginPassword').value.trim();
 
         if (!email || !password) {
-            showErrorMessage('Please enter both email and password.', 'loginError');
+            showErrorMessage('Por favor ingresa tu correo y contraseña.', 'loginError');
             return;
         }
 
@@ -143,7 +138,7 @@ if (signupBtn) {
         const password = document.getElementById('signupPassword').value.trim();
 
         if (!name || !email || !password) {
-            showErrorMessage('Please fill all fields.', 'signupError');
+            showErrorMessage('Por favor completa todos los campos.', 'signupError');
             return;
         }
 
@@ -196,7 +191,7 @@ if (logoutBtn) {
         }).catch(err => {
             // No logout-specific element on most pages; fall back to alert
             const msg = mapFirebaseError(err);
-            alert('Error logging out: ' + msg);
+            alert('Error al cerrar sesión: ' + msg);
         });
     };
 }
@@ -222,7 +217,7 @@ onAuthStateChanged(auth, user => {
     const profileEmail = document.getElementById('profile-email') || document.getElementById('profileEmail');
     if (user) {
         // populate simple profile fields when available
-        if (profileName) profileName.textContent = user.displayName || 'Anonymous';
+        if (profileName) profileName.textContent = user.displayName || 'Anónimo';
         if (profileEmail) profileEmail.textContent = user.email;
     }
 });

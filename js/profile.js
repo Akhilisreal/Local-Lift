@@ -9,6 +9,6 @@ const profileName = document.getElementById('profileName');
 const profileEmail = document.getElementById('profileEmail');
 if (auth.currentUser) {
   // only set when the elements exist on the page
-  if (profileName) profileName.textContent = auth.currentUser.displayName || 'No Name';
+  if (profileName) profileName.textContent = auth.currentUser.displayName || 'Sin Nombre';
   if (profileEmail) profileEmail.textContent = auth.currentUser.email || '';
 }

@@ -33,9 +33,9 @@ function createBusinessCard(business) {
         <img src="${imgSrc}" alt="${business.name}" class="business-card-image">
         <div class="business-card-text">
             <h3>${business.name}</h3>
-            <p>Category: ${business.category}</p>
+            <p>Categoría: ${business.category}</p>
             <p>${dealsText ? '🔥 ' + dealsText : ''}</p>
-            <a href="pages/business.html?businessId=${business.id}" class="view-btn">View Business</a>
+            <a href="pages/business.html?businessId=${business.id}" class="view-btn">Ver Negocio</a>
         </div>
     `;
     return card;

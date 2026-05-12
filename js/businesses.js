@@ -27,16 +27,66 @@ function resolveAssetPath(p) {
 // In production this would come from an external admin tool or API.
 // Seeding Business Data
 const businessData = [
-  { id: "biz1", name: "The Peanut Gallery", latitude: "42.250452", longitude: "-87.839704", category: "Food", img: "assets/peanutgallery.png", description: "A casual, family-friendly spot in Lake Forest known for classic American comfort food, sandwiches, and a relaxed, welcoming atmosphere.", deals: ["50% off appetizers from 3–5 PM on weekdays","Burger & fries for $9.99 every Tuesday","Family meal for four for $29.99", "Free soft drink with any entree on weekends"]},
-  { id: "biz2", name: "Sunset Foods", latitude: "42.251417", longitude: "-87.840779", category: "Food / Retail", img: "assets/sunset.png", description: "A neighborhood grocery store at Sunset Corners on Waukegan Rd, focused on high-quality products and standout customer service.", deals: ["Member discount: 15% off new releases"] },
-  { id: "biz3", name: "Lake Forest Food & Wine", latitude: "42.2497", longitude: "-87.8404", category: "Food", img: "assets/lakeforestfoodandwine.jpeg", description: "A cozy, upscale eatery and wine bar featuring seasonal dishes, curated wines, and a relaxed yet refined atmosphere in downtown Lake Forest.", deals: ["$5 off any wine bottle on Mondays", "Happy hour small plates for $8 from 4–6 PM", "Free dessert with purchase of two entrees", "10% off total bill for students with ID on Thursdays"]},
-  { id: "biz4", name: "Everett Farm",  latitude: "42.224888", longitude: "-87.873873", category: "Food", img: "assets/everett.avif", description: "A newer restaurant that opened at Forest Square in 2021, offering a farm-to-table dining experience in a relaxed, local setting.", deals: ["Free cookie with any loaf on Tuesdays"] },
-  { id: "biz5", name: "Le Colonial Lake Forest",  latitude: "42.251911", longitude: "-87.841270", category: "Food", img: "assets/lecolonial.jpeg", description: "An upscale French-Vietnamese restaurant known for elegant ambiance and refined cuisine — a standout dining option in the Lake Forest area.", deals: ["10% off screen replacements"] },
-  { id: "biz6", name: "Sushi Kushi Toyo",  latitude: "42.225208", longitude: "-87.872353", category: "Food", img: "assets/sushikushi.avif", description: "A Japanese restaurant located at Sunset Corners, offering sushi and other Japanese dishes in a casual, community-friendly setting.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz7", name: "Hollywood Feed",  latitude: "42.250998", longitude: "-87.841486", category: "Retail", img: "assets/hollywoodfeed.jpeg", description: "A pet supply store open since 2019, offering personalized nutrition advice, same-day pet food delivery, and self-serve dog wash stations. Returns are donated to local animal rescues.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz8", name: "OriMay Salon",  latitude: "42.251388428864935", longitude: "-87.84030619969522", category: "Services", img: "assets/orimaylogo.jpg", description: "A boutique hair salon in the Lake Forest Arcade, owned by Paola Lago, who brings over 20 years of experience from high-end salons and spas.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz9", name: "Scout Driver Driving School", latitude: "42.251212", longitude: "-87.8411133", category: "Services", img: "assets/scoutdriver.png", description: "A locally owned driving school at 246 E. Deerpath founded in 2023, offering teen and adult programs that meet all Illinois requirements, with flexible scheduling.", deals: ["Student discount 15% on weekdays"] },
-  { id: "biz10", name: "True Value (Sunset Corners)", latitude: "42.22508349157069", longitude: "-87.87212690701608", category: "Retail", img: "assets/truevalue.jpeg", description: "A hardware and home goods store located in the Sunset Corners shopping area, serving Lake Forest residents with tools, supplies, and home improvement products.", deals: ["Student discount 15% on weekdays"] },
+  {
+    id: "biz1",
+    name: "Toluca's Restaurant",
+    nameEs: "Restaurante Toluca's",
+    latitude: "42.3639",
+    longitude: "-87.8705",
+    category: "Food",
+    img: "assets/tolucas.jpg",
+    description: "An authentic Mexican restaurant at 1419 Washington St serving traditional tacos, tortas, and regional Mexican dishes in a cozy, family-friendly setting in the heart of Waukegan.",
+    descriptionEs: "Un restaurante mexicano auténtico en 1419 Washington St que sirve tacos tradicionales, tortas y platillos regionales en un ambiente acogedor y familiar en el corazón de Waukegan.",
+    deals: ["10% off on Tuesdays", "Family combo special on weekends", "Free salsa with any entrée"]
+  },
+  {
+    id: "biz2",
+    name: "Los Compadres de Waukegan",
+    nameEs: "Los Compadres de Waukegan",
+    latitude: "42.3592",
+    longitude: "-87.8707",
+    category: "Food",
+    img: "assets/loscompadres.jpg",
+    description: "A vibrant Mexican eatery at 1614 Washington St known for antojitos, tacos, and homemade salsas, open late on weekends with a festive, community-centered atmosphere.",
+    descriptionEs: "Un animado restaurante mexicano en 1614 Washington St conocido por sus antojitos, tacos y salsas caseras, abierto hasta tarde los fines de semana con un ambiente festivo y comunitario.",
+    deals: ["Happy hour Monday–Friday 4–6 PM", "Free agua fresca with any combo meal", "Weekend birria special"]
+  },
+  {
+    id: "biz3",
+    name: "La Mexicanita",
+    nameEs: "La Mexicanita",
+    latitude: "42.3974",
+    longitude: "-87.8775",
+    category: "Food",
+    img: "assets/lamexicanita.jpg",
+    description: "A neighborhood Mexican restaurant at 1818 W Yorkhouse Rd offering authentic homestyle cooking including enchiladas, tamales, and fresh-made tortillas in a welcoming local setting.",
+    descriptionEs: "Un restaurante mexicano de barrio en 1818 W Yorkhouse Rd que ofrece cocina casera auténtica, incluyendo enchiladas, tamales y tortillas recién hechas en un ambiente local y acogedor.",
+    deals: ["Lunch special $8.99 Mon–Fri", "Kids eat free on Sundays", "Tamales by the dozen on weekends"]
+  },
+  {
+    id: "biz4",
+    name: "Cemitas Frida",
+    nameEs: "Cemitas Frida",
+    latitude: "42.3633",
+    longitude: "-87.8712",
+    category: "Food",
+    img: "assets/cemitasfrida.jpg",
+    description: "A beloved Waukegan spot at 1409 Washington St specializing in cemitas — overstuffed Puebla-style sandwiches — alongside traditional Mexican street food and refreshing aguas frescas.",
+    descriptionEs: "Un querido lugar en Waukegan en 1409 Washington St especializado en cemitas — sándwiches al estilo Puebla — junto con antojitos mexicanos tradicionales y refrescantes aguas frescas.",
+    deals: ["Combo: cemita + agua fresca for $10", "Free chips & salsa on Saturdays", "Student discount 10% with ID"]
+  },
+  {
+    id: "biz5",
+    name: "El Sabrocito",
+    nameEs: "El Sabrocito",
+    latitude: "42.3849",
+    longitude: "-87.8821",
+    category: "Food",
+    img: "assets/elsabrocito.jpg",
+    description: "A family-owned Mexican restaurant at 2941 Sunset Ave serving hearty traditional plates, handmade salsas, and a warm, inviting atmosphere perfect for the whole family.",
+    descriptionEs: "Un restaurante mexicano familiar en 2941 Sunset Ave que sirve generosos platillos tradicionales, salsas artesanales y un ambiente cálido y acogedor perfecto para toda la familia.",
+    deals: ["10% off for groups of 6+", "Daily lunch specials from $7.99", "Free dessert on birthdays"]
+  },
 ];
 
 // Class that represents each business and contains helpers to ensure
@@ -59,9 +109,11 @@ class Business {
         if (!snap || !snap.exists()) {
           await update(bizRef, {
             name: b.name,
+            nameEs: b.nameEs || '',
             category: b.category,
             img: b.img,
             description: b.description,
+            descriptionEs: b.descriptionEs || '',
             deals: b.deals || [],
             averageRating: 0,
             reviewCount: 0
@@ -71,9 +123,11 @@ class Business {
           const val = snap.val();
           const updates = {};
           if (val.name !== b.name) updates.name = b.name;
+          if (val.nameEs !== b.nameEs) updates.nameEs = b.nameEs || '';
           if (val.category !== b.category) updates.category = b.category;
           if (val.img !== b.img) updates.img = b.img;
           if (val.description !== b.description) updates.description = b.description;
+          if (val.descriptionEs !== b.descriptionEs) updates.descriptionEs = b.descriptionEs || '';
           if (!('deals' in val)) updates.deals = b.deals || [];
           if (!('averageRating' in val)) updates.averageRating = 0;
           if (!('reviewCount' in val)) updates.reviewCount = 0;
@@ -114,13 +168,14 @@ class Business {
         <img class="business-image" src="${resolveAssetPath(this.img)}" alt="${this.name}">
       </div>
       <div class="card-content">
-        <h3>${this.name}</h3>
+        <h3>${this.name}${this.nameEs && this.nameEs !== this.name ? `<br><small class="name-es">${this.nameEs}</small>` : ''}</h3>
         <p>${this.description}</p>
-        <p><strong>Category:</strong> ${this.category}</p>
-        <div class="card-rating">Average Rating: <span class="avg-rating">${this._avgRating ? Number(this._avgRating).toFixed(1) : '—'}</span> <span class="avg-stars">${this._avgRating ? renderStars(this._avgRating) : ''}</span></div>
+        ${this.descriptionEs ? `<p class="description-es"><em>${this.descriptionEs}</em></p>` : ''}
+        <p><strong>Categoría:</strong> ${this.category}</p>
+        <div class="card-rating">Calificación Promedio: <span class="avg-rating">${this._avgRating ? Number(this._avgRating).toFixed(1) : '—'}</span> <span class="avg-stars">${this._avgRating ? renderStars(this._avgRating) : ''}</span></div>
         <div class="card-buttons">
-          <button class="view-business-btn">View Details</button>
-          <button class="favorite-btn">❤️ Favorite</button>
+          <button class="view-business-btn">Ver Detalles</button>
+          <button class="favorite-btn">❤️ Favorito</button>
         </div>
       </div>
     `;
@@ -154,7 +209,7 @@ async function renderBusinessCards() {
   if (categorySelect) {
     const prev = categorySelect.value; // remember previous selection
     const cats = Array.from(new Set(instances.map(i => i.category))).sort();
-    categorySelect.innerHTML = `<option value="all">All</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+    categorySelect.innerHTML = `<option value="all">Todas</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join('');
     // restore previous selection when possible
     if (prev) {
       const hasPrev = Array.from(categorySelect.options).some(opt => opt.value === prev);
@@ -193,13 +248,12 @@ async function renderBusinessCards() {
     const favBtn = card.querySelector('.favorite-btn');
     (async () => {
       const favorited = await isFavorited(inst.id);
-      favBtn.textContent = favorited ? '💔 Unfavorite' : '❤️ Favorite';
+      favBtn.textContent = favorited ? '💔 Quitar Favorito' : '❤️ Favorito';
     })();
 
-    // click toggles favorite status and updates button label
     favBtn.onclick = async () => {
       await toggleFavorite(inst.id);
-      favBtn.textContent = (await isFavorited(inst.id)) ? '💔 Unfavorite' : '❤️ Favorite';
+      favBtn.textContent = (await isFavorited(inst.id)) ? '💔 Quitar Favorito' : '❤️ Favorito';
     };
   }
 
@@ -217,11 +271,10 @@ async function renderBusinessDetails() {
   if (!businessDetailsContainer) return;
   // get businessId from query string
   const businessId = new URLSearchParams(window.location.search).get('businessId');
-  if (!businessId) { businessDetailsContainer.innerHTML = '<p>No business selected.</p>'; return; }
+  if (!businessId) { businessDetailsContainer.innerHTML = '<p>No se seleccionó ningún negocio.</p>'; return; }
 
-  // find the seed data object for this id
   const data = businessData.find(b => b.id === businessId);
-  if (!data) { businessDetailsContainer.innerHTML = '<p>Business not found.</p>'; return; }
+  if (!data) { businessDetailsContainer.innerHTML = '<p>Negocio no encontrado.</p>'; return; }
 
   // ensure DB seed exists and create an instance for rendering
   await Business.ensureAllSeeded();
@@ -233,26 +286,27 @@ async function renderBusinessDetails() {
       <div class="business-header">
         <img src="${resolveAssetPath(business.img)}" alt="${business.name}">
         <div class="business-details-content">
-          <h2>${business.name}</h2>
+          <h2>${business.name}${business.nameEs && business.nameEs !== business.name ? `<br><small class="name-es">${business.nameEs}</small>` : ''}</h2>
           <p>${business.description}</p>
-          <p><strong>Category:</strong> ${business.category}</p>
+          ${business.descriptionEs ? `<p class="description-es"><em>${business.descriptionEs}</em></p>` : ''}
+          <p><strong>Categoría:</strong> ${business.category}</p>
           ${Array.isArray(business.deals) && business.deals.length ? `
-            <div class="business-deals"><h3>Deals</h3><ul class="deals-list">${business.deals.map(d=>`<li>${escapeHtml(d)}</li>`).join('')}</ul></div>` : ''}
-          <div id="avgRating">Average: <span class="avg-rating">—</span> <span class="avg-stars"></span></div>
-          <button id="favBtn">❤️ Favorite</button>
+            <div class="business-deals"><h3>Ofertas</h3><ul class="deals-list">${business.deals.map(d=>`<li>${escapeHtml(d)}</li>`).join('')}</ul></div>` : ''}
+          <div id="avgRating">Promedio: <span class="avg-rating">—</span> <span class="avg-stars"></span></div>
+          <button id="favBtn">❤️ Favorito</button>
         </div>
       </div>
 
       <div class="business-reviews">
         <section id="reviewsSection">
-          <h3>Reviews</h3>
-          <div id="reviewsList">Loading reviews...</div>
+          <h3>Reseñas</h3>
+          <div id="reviewsList">Cargando reseñas...</div>
           <form id="reviewForm">
-            <label for="reviewRating">Rating:</label>
+            <label for="reviewRating">Calificación:</label>
             <select id="reviewRating"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select>
-            <label for="reviewText">Review:</label>
-            <textarea id="reviewText" rows="4" placeholder="Write your review..."></textarea>
-            <button type="submit">Submit Review</button>
+            <label for="reviewText">Reseña:</label>
+            <textarea id="reviewText" rows="4" placeholder="Escribe tu reseña..."></textarea>
+            <button type="submit">Enviar Reseña</button>
           </form>
         </section>
       </div>
@@ -271,8 +325,8 @@ async function renderBusinessDetails() {
 
   // favorite button setup: initial text and click handler
   const favBtn = document.getElementById('favBtn');
-  favBtn.textContent = (await isFavorited(businessId)) ? '💔 Unfavorite' : '❤️ Favorite';
-  favBtn.onclick = async () => { await toggleFavorite(businessId); favBtn.textContent = (await isFavorited(businessId)) ? '💔 Unfavorite' : '❤️ Favorite'; };
+  favBtn.textContent = (await isFavorited(businessId)) ? '💔 Quitar Favorito' : '❤️ Favorito';
+  favBtn.onclick = async () => { await toggleFavorite(businessId); favBtn.textContent = (await isFavorited(businessId)) ? '💔 Quitar Favorito' : '❤️ Favorito'; };
 
   // load and display the average rating
   async function loadAverage() {
@@ -312,7 +366,7 @@ async function renderBusinessDetails() {
           reviewsList.appendChild(div);
         });
       } else {
-        reviewsList.innerHTML = '<p>No reviews yet. Be the first!</p>';
+        reviewsList.innerHTML = '<p>Aún no hay reseñas. ¡Sé el primero!</p>';
       }
     } catch (e) {
       console.error('Error loading reviews', e);
@@ -321,8 +375,8 @@ async function renderBusinessDetails() {
 
   // normalize reviewer name for display
   function formatReviewerName(name) {
-    if (!name) return 'Anonymous';
-    const s = String(name).trim(); if (!s) return 'Anonymous';
+    if (!name) return 'Anónimo';
+    const s = String(name).trim(); if (!s) return 'Anónimo';
     const atIdx = s.indexOf('@'); if (atIdx > 0) return s.slice(0, atIdx); return s;
   }
 
@@ -335,7 +389,7 @@ async function renderBusinessDetails() {
       const rating = Number(document.getElementById('reviewRating').value);
       const text = document.getElementById('reviewText').value.trim();
       const user = auth.currentUser;
-      const name = user?.displayName || user?.email || 'Anonymous';
+      const name = user?.displayName || user?.email || 'Anónimo';
       try {
         // push review record
         await push(ref(database, `businesses/${businessId}/reviews`), { uid: user.uid, name, rating, text, timestamp: Date.now() });
@@ -366,7 +420,7 @@ async function renderBusinessDetails() {
       } catch (e) {
         // show error and log
         console.error('Error submitting review', e);
-        showAlert('Failed to submit review. Try again.', 'error');
+        showAlert('Error al enviar la reseña. Inténtalo de nuevo.', 'error');
       }
     });
   }

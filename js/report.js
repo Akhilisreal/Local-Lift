@@ -60,11 +60,11 @@ async function getAvg(bizId) {
 export async function renderFavoritesReport(user) {
     const container = document.getElementById('favReportList');
     if (!container) return;
-    container.innerHTML = '<p class="rpt-loading">Loading your favorites…</p>';
+    container.innerHTML = '<p class="rpt-loading">Cargando tus favoritos…</p>';
 
     const ids = await getFavoriteIds(user);
     if (!ids.length) {
-        container.innerHTML = '<p class="rpt-empty">You have no favorited businesses yet.</p>';
+        container.innerHTML = '<p class="rpt-empty">Aún no tienes negocios en favoritos.</p>';
         return;
     }
 
@@ -82,14 +82,14 @@ export async function renderFavoritesReport(user) {
                 <div class="rpt-biz-meta">
                     <h3>${esc(biz.name)}</h3>
                     <p>${esc(biz.description)}</p>
-                    <p><strong>Category:</strong> ${esc(biz.category)}</p>
-                    <p><strong>Avg Rating:</strong> ${avg !== null ? Number(avg).toFixed(1) + ' / 5' : '—'}</p>
+                    <p><strong>Categoría:</strong> ${esc(biz.category)}</p>
+                    <p><strong>Calificación Promedio:</strong> ${avg !== null ? Number(avg).toFixed(1) + ' / 5' : '—'}</p>
                     ${Array.isArray(biz.deals) && biz.deals.length
-                        ? `<p><strong>Deals:</strong> ${biz.deals.map(d => esc(d)).join(' &bull; ')}</p>` : ''}
+                        ? `<p><strong>Ofertas:</strong> ${biz.deals.map(d => esc(d)).join(' &bull; ')}</p>` : ''}
                 </div>
             </div>
             <div class="rpt-reviews">
-                <h4>Reviews (${reviews.length})</h4>
+                <h4>Reseñas (${reviews.length})</h4>
                 ${reviews.length ? reviews.map(r => `
                     <div class="rpt-review-item">
                         <span class="rpt-reviewer">${esc(reviewerName(r.name))}</span>
@@ -97,7 +97,7 @@ export async function renderFavoritesReport(user) {
                         <span class="rpt-date">${fmtDate(r.timestamp)}</span>
                         <p class="rpt-review-text">${esc(r.text || '')}</p>
                     </div>`).join('')
-                : '<p class="rpt-empty">No reviews yet.</p>'}
+                : '<p class="rpt-empty">Aún no hay reseñas.</p>'}
             </div>`;
         container.appendChild(section);
     }
@@ -117,10 +117,10 @@ export async function generatePDF(user) {
     doc.setFontSize(22); doc.setFont('helvetica', 'bold');
     doc.text('Local Lift', 14, 14);
     doc.setFontSize(12); doc.setFont('helvetica', 'normal');
-    doc.text('Favorites Report', 14, 22);
+    doc.text('Reporte de Favoritos', 14, 22);
     doc.setFontSize(9);
-    doc.text(`Generated: ${fmtDate(Date.now())}`, 14, 29);
-    doc.text(`User: ${user.displayName || user.email || 'Unknown'}`, pw - 14, 29, { align: 'right' });
+    doc.text(`Generado: ${fmtDate(Date.now())}`, 14, 29);
+    doc.text(`Usuario: ${user.displayName || user.email || 'Desconocido'}`, pw - 14, 29, { align: 'right' });
 
     let y = 42;
     doc.setTextColor(20, 20, 20);
@@ -128,7 +128,7 @@ export async function generatePDF(user) {
     const ids = await getFavoriteIds(user);
     if (!ids.length) {
         doc.setFontSize(12);
-        doc.text('No favorited businesses found.', 14, y);
+        doc.text('No se encontraron negocios en favoritos.', 14, y);
         doc.save('LocalLift_Favorites_Report.pdf');
         return;
     }
@@ -150,7 +150,7 @@ export async function generatePDF(user) {
 
         doc.setTextColor(20, 20, 20);
         doc.setFontSize(9); doc.setFont('helvetica', 'normal');
-        doc.text(`Category: ${biz.category}   |   Avg Rating: ${avg !== null ? Number(avg).toFixed(1) + ' / 5.0' : 'No ratings yet'}`, 14, y);
+        doc.text(`Categoría: ${biz.category}   |   Calificación Promedio: ${avg !== null ? Number(avg).toFixed(1) + ' / 5.0' : 'Sin calificaciones aún'}`, 14, y);
         y += 5;
 
         const descLines = doc.splitTextToSize(biz.description, pw - 28);
@@ -158,7 +158,7 @@ export async function generatePDF(user) {
         y += descLines.length * 5 + 2;
 
         if (Array.isArray(biz.deals) && biz.deals.length) {
-            doc.setFont('helvetica', 'bold'); doc.text('Deals:', 14, y); y += 5;
+            doc.setFont('helvetica', 'bold'); doc.text('Ofertas:', 14, y); y += 5;
             doc.setFont('helvetica', 'normal');
             for (const deal of biz.deals) {
                 const lines = doc.splitTextToSize(`• ${deal}`, pw - 30);
@@ -178,7 +178,7 @@ export async function generatePDF(user) {
             ]);
             doc.autoTable({
                 startY: y,
-                head: [['Reviewer', 'Rating', 'Review', 'Date']],
+                head: [['Reseñador', 'Calificación', 'Reseña', 'Fecha']],
                 body: rows,
                 margin: { left: 14, right: 14 },
                 styles: { fontSize: 8, cellPadding: 2, overflow: 'linebreak' },
@@ -194,7 +194,7 @@ export async function generatePDF(user) {
             y = doc.lastAutoTable.finalY + 10;
         } else {
             doc.setFont('helvetica', 'italic'); doc.setTextColor(130, 130, 130);
-            doc.text('No reviews yet.', 14, y);
+            doc.text('Aún no hay reseñas.', 14, y);
             doc.setTextColor(20, 20, 20); doc.setFont('helvetica', 'normal');
             y += 10;
         }
@@ -217,7 +217,7 @@ export async function generatePDF(user) {
         const trendsSelectEl = document.getElementById('trendsSelect');
         const trendsBiz = trendsSelectEl && trendsSelectEl.value
             ? businessData.find(b => b.id === trendsSelectEl.value) : null;
-        doc.text('Rating Trends' + (trendsBiz ? ': ' + trendsBiz.name : ''), 14, y + 3);
+        doc.text('Tendencias de Calificación' + (trendsBiz ? ': ' + trendsBiz.name : ''), 14, y + 3);
         y += 16;
         if (trendsCanvas && trendsChart) {
             const ts = trendsChart.options.scales;
@@ -239,7 +239,7 @@ export async function generatePDF(user) {
             doc.addImage(imgData, 'PNG', 14, y, imgW, imgH);
         } else {
             doc.setFontSize(10); doc.setTextColor(130, 130, 130);
-            doc.text('No chart data — select a business on the Rating Trends tab first.', 14, y);
+            doc.text('Sin datos — selecciona un negocio en la pestaña Tendencias de Calificación primero.', 14, y);
         }
     }
 
@@ -252,7 +252,7 @@ export async function generatePDF(user) {
         doc.rect(10, y - 5, pw - 20, 11, 'F');
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(13); doc.setFont('helvetica', 'bold');
-        doc.text('Business Comparison', 14, y + 3);
+        doc.text('Comparación de Negocios', 14, y + 3);
         y += 16;
         if (compareCanvas && compareChart) {
             const cs = compareChart.options.scales;
@@ -276,7 +276,7 @@ export async function generatePDF(user) {
             if (compareSet.size) {
                 doc.setTextColor(20, 20, 20);
                 doc.setFontSize(9); doc.setFont('helvetica', 'bold');
-                doc.text('Businesses Compared:', 14, y); y += 5;
+                doc.text('Negocios Comparados:', 14, y); y += 5;
                 doc.setFont('helvetica', 'normal');
                 for (const [id] of compareSet) {
                     const biz = businessData.find(b => b.id === id);
@@ -285,7 +285,7 @@ export async function generatePDF(user) {
             }
         } else {
             doc.setFontSize(10); doc.setTextColor(130, 130, 130);
-            doc.text('No chart data — add businesses on the Compare tab first.', 14, y);
+            doc.text('Sin datos — agrega negocios en la pestaña Comparar primero.', 14, y);
         }
     }
 
@@ -294,7 +294,7 @@ export async function generatePDF(user) {
     for (let p = 1; p <= total; p++) {
         doc.setPage(p);
         doc.setFontSize(8); doc.setTextColor(150, 150, 150);
-        doc.text(`Local Lift Favorites Report  •  Page ${p} of ${total}`, pw / 2, 292, { align: 'center' });
+        doc.text(`Local Lift Reporte de Favoritos  •  Página ${p} de ${total}`, pw / 2, 292, { align: 'center' });
     }
 
     doc.save('LocalLift_Favorites_Report.pdf');
@@ -334,7 +334,7 @@ export async function renderTrendsChart(bizId) {
             labels,
             datasets: [
                 {
-                    label: 'Individual Ratings',
+                    label: 'Calificaciones Individuales',
                     data: ratings,
                     borderColor: 'rgba(54,154,169,0.8)',
                     backgroundColor: 'rgba(54,154,169,0.15)',
@@ -342,7 +342,7 @@ export async function renderTrendsChart(bizId) {
                     borderWidth: 1.5, tension: 0, fill: true
                 },
                 {
-                    label: 'Running Average',
+                    label: 'Promedio Acumulado',
                     data: runAvg,
                     borderColor: '#f0a500',
                     backgroundColor: 'transparent',
@@ -354,7 +354,7 @@ export async function renderTrendsChart(bizId) {
         options: {
             responsive: true, maintainAspectRatio: true,
             scales: {
-                y: { min: 0, max: 5, ticks: { stepSize: 1, color: '#ccc' }, grid: { color: 'rgba(255,255,255,0.08)' }, title: { display: true, text: 'Rating', color: '#ccc' } },
+                y: { min: 0, max: 5, ticks: { stepSize: 1, color: '#ccc' }, grid: { color: 'rgba(255,255,255,0.08)' }, title: { display: true, text: 'Calificación', color: '#ccc' } },
                 x: { ticks: { color: '#ccc', maxRotation: 40 }, grid: { color: 'rgba(255,255,255,0.06)' } }
             },
             plugins: {
@@ -447,8 +447,8 @@ function _refreshCompareUI() {
         options: {
             responsive: true, maintainAspectRatio: true,
             scales: {
-                y: { min: 0, max: 5, ticks: { stepSize: 1, color: '#ccc' }, grid: { color: 'rgba(255,255,255,0.08)' }, title: { display: true, text: 'Running Avg Rating', color: '#ccc' } },
-                x: { ticks: { color: '#ccc' }, grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Review Number', color: '#ccc' } }
+                y: { min: 0, max: 5, ticks: { stepSize: 1, color: '#ccc' }, grid: { color: 'rgba(255,255,255,0.08)' }, title: { display: true, text: 'Promedio Acumulado', color: '#ccc' } },
+                x: { ticks: { color: '#ccc' }, grid: { color: 'rgba(255,255,255,0.06)' }, title: { display: true, text: 'Número de Reseña', color: '#ccc' } }
             },
             plugins: {
                 legend: { labels: { color: '#ddd' } },
@@ -514,7 +514,7 @@ export function initReportPage() {
     if (addTrendsBtn) {
         addTrendsBtn.addEventListener('click', () => {
             includeTrendsInPDF = !includeTrendsInPDF;
-            addTrendsBtn.textContent = includeTrendsInPDF ? '✓ Added to PDF' : '＋ Add Chart to PDF';
+            addTrendsBtn.textContent = includeTrendsInPDF ? '✓ Agregado al PDF' : '＋ Agregar Gráfica al PDF';
             addTrendsBtn.classList.toggle('added', includeTrendsInPDF);
         });
     }
@@ -522,7 +522,7 @@ export function initReportPage() {
     if (addCompareBtn) {
         addCompareBtn.addEventListener('click', () => {
             includeCompareInPDF = !includeCompareInPDF;
-            addCompareBtn.textContent = includeCompareInPDF ? '✓ Added to PDF' : '＋ Add Chart to PDF';
+            addCompareBtn.textContent = includeCompareInPDF ? '✓ Agregado al PDF' : '＋ Agregar Gráfica al PDF';
             addCompareBtn.classList.toggle('added', includeCompareInPDF);
         });
     }
@@ -534,9 +534,9 @@ export function initReportPage() {
             const user = auth.currentUser;
             if (!user) return;
             pdfBtn.disabled = true;
-            pdfBtn.textContent = 'Generating…';
+            pdfBtn.textContent = 'Generando…';
             try { await generatePDF(user); }
-            finally { pdfBtn.disabled = false; pdfBtn.textContent = 'Download PDF Report'; }
+            finally { pdfBtn.disabled = false; pdfBtn.textContent = 'Descargar Reporte PDF'; }
         });
     }
 

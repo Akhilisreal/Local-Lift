@@ -41,7 +41,7 @@ function loadBusinessDetails() {
                 <p>${business.description || ''}</p>
             `;
         } else {
-            businessContainer.innerHTML = '<p>Business not found.</p>';
+            businessContainer.innerHTML = '<p>Negocio no encontrado.</p>';
         }
     }).catch(e => { console.error('Failed to load business', e); });
 }
@@ -49,7 +49,7 @@ function loadBusinessDetails() {
 // Normalize different review shapes into a consistent object shape
 function normalizeReviewObj(r) {
     return {
-        name: r.name || r.userName || 'Anonymous',
+        name: r.name || r.userName || 'Anónimo',
         rating: Number(r.rating || r.stars || 0),
         text: r.text || r.comment || '',
         timestamp: r.timestamp || r.date || Date.now()
@@ -71,7 +71,7 @@ function loadReviews() {
                 reviewsListEl.appendChild(div);
             });
         } else {
-            reviewsListEl.innerHTML = '<p>No reviews yet.</p>';
+            reviewsListEl.innerHTML = '<p>Aún no hay reseñas.</p>';
         }
     }).catch(e => { console.error('Failed to load reviews', e); });
 }
@@ -79,17 +79,17 @@ function loadReviews() {
 // Submit a new review, update average/count, and refresh the list
 async function submitReview() {
     const user = auth.currentUser;
-    if (!user) { showAlert('You must be logged in to leave a review.', 'error'); return; }
+    if (!user) { showAlert('Debes iniciar sesión para dejar una reseña.', 'error'); return; }
     if (!commentEl || !ratingEl) return;
     const comment = commentEl.value.trim();
     const rating = Number(ratingEl.value);
-    if (!comment || !rating || rating < 1 || rating > 5) { showAlert('Please provide a comment and a rating between 1-5.', 'error'); return; }
+    if (!comment || !rating || rating < 1 || rating > 5) { showAlert('Por favor proporciona un comentario y una calificación entre 1 y 5.', 'error'); return; }
 
     try {
         // push review object into the business reviews list
         await push(ref(database, `businesses/${businessId}/reviews`), {
             uid: user.uid,
-            name: user.displayName || user.email || 'Anonymous',
+            name: user.displayName || user.email || 'Anónimo',
             rating,
             text: comment,
             timestamp: Date.now()
@@ -109,7 +109,7 @@ async function submitReview() {
         if (reviewsListEl) await loadReviews();
     } catch (e) {
         console.error('Error submitting review', e);
-        showAlert('Failed to submit review. Try again.', 'error');
+        showAlert('Error al enviar la reseña. Inténtalo de nuevo.', 'error');
     }
 }
 

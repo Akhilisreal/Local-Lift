@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Local Lift</title>
+  <meta http-equiv="Content-Language" content="es">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/business.css">
 </head>
@@ -13,11 +14,11 @@
   <header class="navbar">
     <a href="landing.html" class="logo">Local Lift</a>
     <nav>
-      <a href="pages/favorites.html">Favorites</a>
-      <a href="pages/profile.html">Profile</a>
-      <a href="pages/report.html">Custom Report</a>
-      <a href="pages/help.html">Help</a>
-      <button id="logoutBtn">Logout</button>
+      <a href="pages/favorites.html">Favoritos</a>
+      <a href="pages/profile.html">Perfil</a>
+      <a href="pages/report.html">Reporte Personalizado</a>
+      <a href="pages/help.html">Ayuda</a>
+      <button id="logoutBtn">Cerrar Sesión</button>
     </nav>
   </header>
 
@@ -25,17 +26,17 @@
   <main id="main-content-container">
     <div class="controls">
       <div class="search-control">
-        <input type="text" id="businessSearch" placeholder="Search businesses..." autocomplete="off">
+        <input type="text" id="businessSearch" placeholder="Buscar negocios..." autocomplete="off">
       </div>
       <div class="filter-control">
-        <label>Category: <select id="categoryFilter"></select></label>
+        <label>Categoría: <select id="categoryFilter"></select></label>
       </div>
       <div class="sort-control">
-        <label>Sort: <select id="sortSelect">
-          <option value="">None</option>
-          <option value="rating-desc">Rating (high → low)</option>
-          <option value="rating-asc">Rating (low → high)</option>
-          <option value="category-asc">Category (A → Z)</option>
+        <label>Ordenar: <select id="sortSelect">
+          <option value="">Ninguno</option>
+          <option value="rating-desc">Calificación (alta → baja)</option>
+          <option value="rating-asc">Calificación (baja → alta)</option>
+          <option value="category-asc">Categoría (A → Z)</option>
         </select></label>
       </div>
     </div>
